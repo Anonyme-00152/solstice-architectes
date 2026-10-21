@@ -1,0 +1,2120 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EBEBE7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1011" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23151617'/%3E%3Cpath d='M4.5 23.5h23' stroke='%23EBEBE7' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M8 23.5a8 8 0 0 1 16 0' fill='none' stroke='%23EBEBE7' stroke-width='2.2'/%3E%3Ccircle cx='21.1' cy='17.4' r='3' fill='%23F2B200'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://anonyme-00152.github.io/solstice-architectes/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Solstice Architectes">
+<meta property="og:description" content="Solstice, atelier d’architecture à Bordeaux : maisons, logements et équipements publics en bois et matériaux biosourcés, dessinés à partir de la course du soleil.">
+<meta property="og:url" content="https://anonyme-00152.github.io/solstice-architectes/">
+<meta name="twitter:card" content="summary">
+<title>Solstice Architectes</title>
+<meta name="description" content="Solstice, atelier d’architecture à Bordeaux : maisons, logements et équipements publics en bois et matériaux biosourcés, dessinés à partir de la course du soleil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Hanken+Grotesk:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>document.documentElement.classList.add('js');document.documentElement.lang='fr';</script>
+<style>
+:root{
+  /* Layout : planche d'architecte. Grille de 12 colonnes, titres condensés ancrés à gauche, cotations en mono à droite.
+     Un seul geste fort : l'étude d'ensoleillement 3D du héros, avec le jaune soleil comme unique couleur vive. */
+  --paper:#EBEBE7;
+  --surface:#DFDFDA;
+  --ink:#151617;
+  --muted:#5F605B;
+  --line:#C9C9C2;
+  --accent:#855600;
+  --sun:#F2B200;
+  --on-sun:#151617;
+  --signal:#2E7A4D;
+  --danger:#B42318;
+  --grain:.05;
+  --grain-mode:multiply;
+  --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",sans-serif;
+  --f-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --step--1:clamp(.72rem,.7rem + .12vw,.8rem);
+  --step-0:clamp(1rem,.97rem + .15vw,1.1rem);
+  --step-1:clamp(1.15rem,1.04rem + .5vw,1.5rem);
+  --step-2:clamp(1.7rem,1.3rem + 1.6vw,2.9rem);
+  --step-3:clamp(2.9rem,1.8rem + 4.8vw,7rem);
+  --step-4:clamp(3.6rem,2rem + 8vw,10.5rem);
+  --pad:clamp(16px,3.4vw,56px);
+  --gl:max(var(--pad),env(safe-area-inset-left,0px));
+  --gr:max(var(--pad),env(safe-area-inset-right,0px));
+  --ease:cubic-bezier(.16,1,.3,1);
+  --marquee-h:84px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1011;--surface:#17181B;--ink:#ECEBE6;--muted:#9C9C95;--line:#2B2C2F;
+    --accent:#F4C34A;--sun:#F5B700;--on-sun:#151617;--signal:#5BD08F;--danger:#FF7A6B;
+    --grain:.06;--grain-mode:screen;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1011;--surface:#17181B;--ink:#ECEBE6;--muted:#9C9C95;--line:#2B2C2F;
+  --accent:#F4C34A;--sun:#F5B700;--on-sun:#151617;--signal:#5BD08F;--danger:#FF7A6B;
+  --grain:.06;--grain-mode:screen;color-scheme:dark;
+}
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:var(--step-0);line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip}
+body::after{content:"";position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:150;opacity:var(--grain);mix-blend-mode:var(--grain-mode);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+::selection{background:var(--sun);color:var(--on-sun)}
+img,svg{display:block;max-width:100%}
+canvas{display:block}
+a{color:inherit}
+button,input,textarea{font:inherit;color:inherit}
+p,h1,h2,h3,figure,blockquote,dl,dd{margin:0}
+h1,h2,h3{font-weight:inherit}
+ul,ol{list-style:none;margin:0;padding:0}
+em{font-style:normal}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:fixed;left:16px;top:-80px;z-index:300;padding:12px 18px;background:var(--ink);color:var(--paper);border-radius:999px;text-decoration:none;font-family:var(--f-mono);font-size:var(--step--1)}
+.skip:focus{top:calc(env(safe-area-inset-top,0px) + 16px)}
+.wrap{width:100%;max-width:1720px;margin-inline:auto;padding-left:var(--gl);padding-right:var(--gr)}
+.section{padding-block:clamp(96px,12vw,184px)}
+
+.label{font-family:var(--f-mono);font-size:var(--step--1);font-weight:400;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);line-height:1.45}
+.h2{font-family:var(--f-display);font-size:var(--step-3);font-weight:800;line-height:.86;letter-spacing:-.005em;text-transform:uppercase;text-wrap:balance}
+.h2 em,.hero-title em,.contact-title em,.footer-cta em,.case-title em{font-weight:200;text-transform:none;color:var(--accent);letter-spacing:0}
+.sec-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px 24px;align-items:end;margin-bottom:clamp(48px,6vw,96px)}
+.sec-head .label{grid-column:1 / span 3;align-self:start;padding-top:.4em}
+.sec-head .h2{grid-column:4 / -1}
+.sec-intro{grid-column:4 / span 5;color:var(--muted);max-width:52ch;text-wrap:pretty}
+.sec-note{grid-column:10 / -1;font-family:var(--f-mono);font-size:var(--step--1);color:var(--muted);line-height:1.55}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.06em;text-decoration:none;cursor:pointer;transition:background .35s,color .35s,border-color .35s}
+.btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-round{--s:clamp(104px,9vw,140px);position:relative;display:grid;place-items:center;width:var(--s);height:var(--s);border-radius:50%;background:var(--ink);color:var(--paper);text-decoration:none;text-align:center;font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.06em;line-height:1.35;padding:18px;overflow:hidden;transition:color .4s}
+.btn-round::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--sun);transform:scale(0);transition:transform .7s var(--ease)}
+.btn-round:hover{color:var(--on-sun)}
+.btn-round:hover::before{transform:scale(1)}
+.btn-round span{position:relative}
+.btn-primary{display:inline-flex;align-items:center;gap:14px;padding:18px 30px;border:0;border-radius:999px;background:var(--sun);color:var(--on-sun);font-family:var(--f-body);font-weight:600;font-size:var(--step-0);cursor:pointer;text-decoration:none}
+.btn-primary svg{width:18px;height:18px;transition:transform .5s var(--ease)}
+.btn-primary:hover svg{transform:translateX(5px)}
+.dot{position:relative;flex:none;display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--signal)}
+.dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--signal);animation:ping 2.4s var(--ease) infinite}
+@keyframes ping{0%{transform:scale(.4);opacity:1}100%{transform:scale(1.6);opacity:0}}
+
+/* ---------- loader : un lever et un coucher de soleil ---------- */
+.loader{display:none}
+html.js .loader{position:fixed;inset:0;z-index:250;display:flex;flex-direction:column;background:var(--ink);color:var(--paper)}
+.loader-stage{flex:1;display:grid;place-items:center;padding-inline:24px}
+.loader-arc{width:min(72vw,560px);overflow:visible}
+.loader-arc path{fill:none;stroke-width:1.2}
+.arc-track{stroke:color-mix(in srgb,var(--paper) 25%,var(--ink));stroke-dasharray:3 5}
+.arc-fill{stroke:var(--paper);stroke-dasharray:1;stroke-dashoffset:1}
+.loader-arc line{stroke:var(--paper);stroke-width:1.2}
+.arc-sun{fill:var(--sun)}
+.loader-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:20px;padding-bottom:calc(env(safe-area-inset-bottom,0px) + clamp(24px,4vw,48px))}
+.loader-brand{display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-size:1.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.loader-brand svg{width:28px;height:28px}
+.loader-count{font-family:var(--f-display);font-weight:800;font-size:clamp(5rem,18vw,18rem);line-height:.76;font-variant-numeric:tabular-nums}
+.loader-bar{grid-column:1 / -1;height:1px;background:color-mix(in srgb,var(--paper) 22%,var(--ink));overflow:hidden}
+.loader-bar i{display:block;height:100%;background:var(--paper);transform:scaleX(0);transform-origin:left}
+
+/* ---------- navigation ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:calc(env(safe-area-inset-top,0px) + 18px);padding-bottom:18px;padding-left:var(--gl);padding-right:var(--gr);color:#fff;mix-blend-mode:difference;pointer-events:none}
+.nav > *{pointer-events:auto}
+.nav :focus-visible{outline-color:#fff}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:700;font-size:1.45rem;text-transform:uppercase;letter-spacing:.05em;line-height:1}
+.logo svg{width:26px;height:26px}
+.logo .logo-sun{transform-origin:16px 23.5px;transition:transform 1s var(--ease)}
+.logo:hover .logo-sun{transform:rotate(-80deg)}
+.nav-links{display:flex;gap:clamp(18px,2.4vw,40px)}
+.nav-links a,.nav-cta{position:relative;text-decoration:none;font-size:.95rem;font-weight:500}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-links sup{font-family:var(--f-mono);font-size:.62em;margin-left:3px;opacity:.7}
+.nav-right{display:flex;align-items:center;gap:22px}
+.nav-clock{font-family:var(--f-mono);font-size:var(--step--1);letter-spacing:.04em;text-transform:uppercase;font-variant-numeric:tabular-nums;opacity:.8;white-space:nowrap}
+.nav-cta{padding:10px 18px;border:1px solid currentColor;border-radius:999px;transition:background .3s,color .3s}
+.nav-cta:hover{background:#fff;color:#000}
+.menu-btn{display:none;align-items:center;gap:10px;background:none;border:1px solid currentColor;border-radius:999px;padding:9px 16px;cursor:pointer;font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.06em}
+.menu-btn i{display:grid;gap:4px;width:14px}
+.menu-btn i::before,.menu-btn i::after{content:"";height:1.5px;background:currentColor;transition:transform .5s var(--ease)}
+.menu-btn[aria-expanded="true"] i::before{transform:translateY(2.75px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] i::after{transform:translateY(-2.75px) rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;justify-content:flex-end;gap:40px;background:var(--ink);color:var(--paper);padding-top:calc(env(safe-area-inset-top,0px) + 110px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 32px);padding-left:var(--gl);padding-right:var(--gr);clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path .9s var(--ease),visibility 0s .9s}
+.menu.is-open{clip-path:inset(0 0 0 0);visibility:visible;transition:clip-path .9s var(--ease),visibility 0s}
+.menu ul{display:grid;gap:2px}
+.menu a{display:flex;align-items:baseline;justify-content:space-between;gap:16px;text-decoration:none;font-family:var(--f-display);font-size:clamp(3rem,15vw,6rem);font-weight:800;text-transform:uppercase;line-height:1;border-bottom:1px solid color-mix(in srgb,var(--paper) 16%,var(--ink));padding-block:4px}
+.menu a small{font-family:var(--f-mono);font-size:var(--step--1);font-weight:400;letter-spacing:.06em;opacity:.6}
+.menu-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.06em;opacity:.7}
+
+/* ---------- héros ---------- */
+.hero{position:relative;isolation:isolate;background:var(--paper);min-height:max(640px,calc(100svh - var(--marquee-h)));display:flex;flex-direction:column;overflow:hidden}
+.hero-gl{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+.hero-fallback{display:none;position:absolute;right:7vw;top:24%;width:min(46vw,520px);max-width:100%;aspect-ratio:2 / 1;border:1.5px dashed var(--line);border-bottom:0;border-radius:999px 999px 0 0}
+.hero-fallback::before{content:"";position:absolute;left:-12%;right:-12%;bottom:0;height:1.5px;background:var(--ink)}
+.hero-fallback::after{content:"";position:absolute;width:36px;height:36px;border-radius:50%;background:var(--sun);right:12%;top:8%}
+.no-gl .hero-fallback{display:block}
+.no-gl .hud{display:none}
+.hero-inner{position:relative;flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding-top:calc(env(safe-area-inset-top,0px) + clamp(92px,10vw,128px));padding-bottom:clamp(24px,3.2vw,44px);pointer-events:none}
+.hero-inner a,.hero-inner button,.hero-inner input,.hud{pointer-events:auto}
+.eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.eyebrow-dot{display:inline-flex;align-items:center;gap:10px;color:var(--ink)}
+.hero-title{margin-top:auto;font-family:var(--f-display);font-weight:800;font-size:clamp(4rem,12.6vw,16rem);line-height:.8;text-transform:uppercase;letter-spacing:-.005em}
+.hero-title .line{display:block;overflow:hidden;white-space:nowrap;padding-top:.14em;margin-top:-.14em}
+.hero-title .line-in{display:block;will-change:transform}
+.hero-foot{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:end;margin-top:clamp(18px,2.4vw,36px)}
+.hero-lede{grid-column:1 / span 4;font-size:var(--step-1);line-height:1.4;max-width:34ch;text-wrap:pretty}
+.hero-cta{grid-column:5 / span 2;justify-self:center}
+
+.hud{grid-column:9 / -1;justify-self:end;width:min(100%,340px);display:grid;gap:12px;padding:16px 18px 14px;border:1px solid var(--line);border-radius:6px;background:color-mix(in srgb,var(--paper) 74%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);font-family:var(--f-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.hud-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;line-height:1.5}
+.hud-title{color:var(--ink);font-weight:500}
+.compass{width:44px;height:44px;flex:none;color:var(--ink)}
+.compass .c-sun{fill:var(--sun);stroke:var(--sun)}
+.hud-mid{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.hud-time{font-family:var(--f-display);font-weight:700;font-size:3rem;line-height:.82;color:var(--ink);letter-spacing:0;font-variant-numeric:tabular-nums}
+.hud-data{display:flex;gap:18px}
+.hud-data dd{color:var(--ink);font-size:.9rem;font-variant-numeric:tabular-nums}
+.hud-controls{display:flex;align-items:center;gap:12px}
+.hud-play{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--paper);cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.hud-play:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.hud-play svg{width:12px;height:12px}
+.hud-play .i-play{display:none}
+.hud-play.is-paused .i-play{display:block}
+.hud-play.is-paused .i-pause{display:none}
+.hud-scale{display:flex;justify-content:space-between;gap:8px;font-size:.62rem;padding-left:46px}
+input[type="range"]{-webkit-appearance:none;appearance:none;flex:1;min-width:0;height:24px;background:transparent;cursor:pointer;margin:0}
+input[type="range"]::-webkit-slider-runnable-track{height:1px;background:var(--ink)}
+input[type="range"]::-moz-range-track{height:1px;background:var(--ink)}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;margin-top:-7.5px;border-radius:50%;background:var(--sun);border:2px solid var(--ink)}
+input[type="range"]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--sun);border:2px solid var(--ink)}
+
+/* ---------- bandeau ---------- */
+.marquee{height:var(--marquee-h);display:flex;align-items:center;overflow:hidden;border-block:1px solid var(--line);white-space:nowrap}
+.marquee-track{display:flex;width:max-content;will-change:transform}
+.marquee-group{display:flex;align-items:center;flex:none}
+.marquee-group li{display:flex;align-items:center;gap:.5em;padding-right:.5em;font-family:var(--f-display);font-size:var(--step-2);font-weight:750;text-transform:uppercase;line-height:1}
+.marquee-group li:nth-child(even) span{font-weight:200;color:var(--accent)}
+.marquee-group svg{width:.7em;height:.7em;flex:none}
+
+/* ---------- atelier ---------- */
+.manifesto .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
+.manifesto .label{grid-column:1 / span 3;padding-top:.7em}
+.manifesto-text{grid-column:4 / -1;font-size:clamp(1.5rem,.85rem + 2.6vw,3.6rem);font-weight:500;line-height:1.12;letter-spacing:-.025em;text-wrap:pretty;max-width:26em}
+.manifesto-text em{color:var(--accent)}
+.facts{grid-column:4 / -1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(56px,7vw,112px);border-top:1px solid var(--line)}
+.facts > div{display:flex;flex-direction:column-reverse;justify-content:flex-end;gap:12px;padding:22px 16px 0 0}
+.facts dd{font-family:var(--f-display);font-weight:800;font-size:clamp(3rem,1.8rem + 4vw,6.4rem);line-height:.84;font-variant-numeric:tabular-nums}
+.facts dt{font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);max-width:22ch;line-height:1.45}
+
+/* ---------- projets ---------- */
+.works{position:relative;background:var(--paper)}
+.works-inner{padding-top:clamp(40px,6vw,96px);padding-bottom:clamp(96px,10vw,160px)}
+.works-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 40px;margin-bottom:clamp(32px,4vw,56px)}
+.works-head .h2{max-width:12ch}
+.works-head .label{margin-bottom:14px}
+.works-meta{display:grid;gap:6px;text-align:right;font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.works-meta .hint{display:none;color:var(--ink)}
+.works-viewport{overflow:hidden;overflow:clip}
+.works-track{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,400px),1fr));gap:clamp(36px,4vw,56px) clamp(20px,2.2vw,36px);padding-left:var(--gl);padding-right:var(--gr)}
+.work{position:relative;min-width:0}
+.work-cover{position:relative;aspect-ratio:5 / 4;max-width:100%;overflow:hidden;border-radius:3px;background:var(--fb,var(--surface))}
+.work-cover canvas{position:absolute;top:0;left:-6%;width:112%;height:100%;max-width:none;transition:transform 1.2s var(--ease)}
+.work:hover .work-cover canvas{transform:scale(1.045)}
+.work-badge{position:absolute;right:14px;top:14px;z-index:1;padding:6px 10px;border-radius:999px;background:rgba(14,15,16,.62);color:#F4F4F1;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.work-meta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:baseline;padding-top:18px}
+.work-title{font-family:var(--f-display);font-size:var(--step-2);font-weight:700;text-transform:uppercase;line-height:.95;transition:font-weight .6s var(--ease)}
+.work:hover .work-title{font-weight:300}
+.work-sub{grid-column:1;color:var(--muted);font-size:.98rem}
+.work-tags{grid-column:2;grid-row:1 / span 2;align-self:start;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;max-width:220px}
+.work-tags span{padding:5px 10px;border:1px solid var(--line);border-radius:999px;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.work-open{position:absolute;inset:0;z-index:2;width:100%;background:none;border:0;cursor:pointer;border-radius:3px}
+.work-end .end-link{display:flex;flex-direction:column;justify-content:space-between;gap:20px;aspect-ratio:5 / 4;max-width:100%;padding:clamp(20px,2.4vw,36px);border-radius:3px;background:var(--ink);color:var(--paper);text-decoration:none;transition:background .5s,color .5s}
+.work-end .end-link:hover{background:var(--sun);color:var(--on-sun)}
+.end-num{font-family:var(--f-display);font-weight:800;font-size:clamp(5rem,2.4rem + 7vw,11rem);line-height:.78}
+.end-text{font-size:var(--step-1);line-height:1.3;max-width:24ch}
+.end-arrow{font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.08em}
+.works.is-h .works-inner{height:100svh;min-height:620px;display:flex;flex-direction:column;justify-content:center;padding-top:calc(env(safe-area-inset-top,0px) + 100px);padding-bottom:32px}
+.works.is-h .works-head{margin-bottom:clamp(24px,3vw,40px)}
+.works.is-h .works-meta .hint{display:block}
+.works.is-h .works-track{display:flex;width:max-content;gap:clamp(20px,2.2vw,36px)}
+.works.is-h .work{flex:none;width:max(300px,min(40vw,calc((100svh - 390px) * 1.25)))}
+
+/* ---------- savoir-faire ---------- */
+.svc-list{border-bottom:1px solid var(--line)}
+.svc{border-top:1px solid var(--line)}
+.svc-row{appearance:none;width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto) 44px;align-items:center;gap:12px 32px;padding-block:clamp(14px,1.8vw,26px);background:none;border:0;text-align:left;cursor:pointer}
+.svc-name{font-family:var(--f-display);font-size:clamp(3rem,1.4rem + 6.4vw,8.4rem);font-weight:250;text-transform:uppercase;line-height:.86;transition:font-weight .8s var(--ease),color .4s}
+.svc-row:hover .svc-name,.svc.is-open .svc-name{font-weight:850}
+.svc.is-open .svc-name{color:var(--accent)}
+.svc-tag{font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);text-align:right}
+.svc-icon{position:relative;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;transition:background .4s,border-color .4s,transform .6s var(--ease)}
+.svc-icon::before,.svc-icon::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1.5px;margin:-.75px 0 0 -7px;background:currentColor;transition:transform .6s var(--ease)}
+.svc-icon::after{transform:rotate(90deg)}
+.svc.is-open .svc-icon{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:rotate(180deg)}
+.svc.is-open .svc-icon::after{transform:rotate(0)}
+.svc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s var(--ease)}
+.svc.is-open .svc-body{grid-template-rows:1fr}
+.svc-body > div{overflow:hidden;visibility:hidden;transition:visibility 0s .7s}
+.svc.is-open .svc-body > div{visibility:visible;transition-delay:0s}
+.svc-content{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px 24px;padding-bottom:clamp(28px,3vw,44px)}
+.svc-content p{grid-column:1 / span 6;font-size:var(--step-1);line-height:1.42;max-width:44ch;text-wrap:pretty}
+.svc-content .chips{grid-column:7 / span 4;align-content:start}
+.svc-content .svc-facts{grid-column:11 / -1;font-family:var(--f-mono);font-size:var(--step--1);color:var(--muted);line-height:1.6;text-transform:uppercase;letter-spacing:.05em}
+.svc-facts b{display:block;color:var(--ink);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:7px 13px;border:1px solid var(--line);border-radius:999px;font-size:.88rem;line-height:1.2}
+
+/* ---------- sobriété (bande inversée) ---------- */
+.perf{--b-bg:var(--ink);--b-fg:var(--paper);--b-muted:color-mix(in srgb,var(--paper) 62%,var(--ink));--b-line:color-mix(in srgb,var(--paper) 18%,var(--ink));background:var(--b-bg);color:var(--b-fg)}
+.perf .label,.perf .sec-intro,.perf .sec-note{color:var(--b-muted)}
+.perf .h2 em{color:var(--b-fg)}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--b-line)}
+.metric{display:flex;flex-direction:column;gap:10px;padding:26px 28px 0 0;min-width:0}
+.metric + .metric{padding-left:28px;border-left:1px solid var(--b-line)}
+.metric-name{font-family:var(--f-mono);font-size:var(--step--1);font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.metric-desc{color:var(--b-muted);font-size:.95rem;min-height:3em}
+.metric-value{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-top:10px}
+.metric-value .num{font-family:var(--f-display);font-weight:800;font-size:clamp(4rem,2.4rem + 4.6vw,8rem);line-height:.8;font-variant-numeric:tabular-nums}
+.metric-value .unit{font-family:var(--f-mono);font-size:var(--step--1);color:var(--b-muted)}
+.gauge{position:relative;height:6px;margin-top:18px;border-radius:3px;background:var(--b-line)}
+.gauge-fill{position:absolute;inset:0 auto 0 0;border-radius:3px;background:var(--b-fg);transform-origin:left}
+.gauge-mark{position:absolute;top:-7px;bottom:-7px;width:2px;margin-left:-1px;background:var(--sun)}
+.gauge-legend{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--b-muted);display:flex;align-items:center;gap:8px}
+.gauge-legend::before{content:"";flex:none;width:2px;height:10px;background:var(--sun)}
+
+/* ---------- démarche ---------- */
+.gantt{--label:minmax(190px,24%)}
+.gantt-axis,.gantt-row{display:grid;grid-template-columns:var(--label) repeat(18,minmax(0,1fr));align-items:center}
+.gantt-axis{padding-bottom:10px}
+.gantt-axis span{font-family:var(--f-mono);font-size:.68rem;color:var(--muted);padding-left:5px;border-left:1px solid var(--line);font-variant-numeric:tabular-nums}
+.gantt-axis span i{font-style:normal}
+.gantt-axis .gantt-corner{border:0;padding:0;text-transform:uppercase;letter-spacing:.08em;overflow:hidden;white-space:nowrap}
+.gantt-row{border-top:1px solid var(--line);padding-block:14px;min-height:84px}
+.gantt-rows .gantt-row:last-child{border-bottom:1px solid var(--line)}
+.gantt-label{grid-column:1;grid-row:1;display:flex;align-items:baseline;gap:14px;padding-right:24px;min-width:0}
+.gantt-label b{font-family:var(--f-mono);font-size:var(--step--1);font-weight:500;color:var(--accent)}
+.gantt-label strong{display:block;font-family:var(--f-display);font-size:clamp(1.5rem,1.1rem + 1vw,2.2rem);font-weight:750;text-transform:uppercase;line-height:.95}
+.gantt-label span{display:block;color:var(--muted);font-size:.88rem;line-height:1.35;margin-top:5px}
+.gantt-track{grid-column:2 / -1;grid-row:1;align-self:stretch;margin-block:-14px;background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px calc(100% / 18))}
+.gantt-bar{grid-row:1;position:relative;height:42px;display:flex;align-items:center;padding-inline:12px;border-radius:999px;background:var(--ink);color:var(--paper);font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;white-space:nowrap;overflow:hidden;transform-origin:left;margin-inline:3px}
+.gantt-bar.is-wait{background:repeating-linear-gradient(-45deg,var(--ink) 0 1.5px,transparent 1.5px 7px);border:1.5px solid var(--ink);color:var(--ink)}
+.gantt-bar.is-wait span{background:var(--paper);padding:2px 7px;border-radius:999px}
+.gantt-bar.is-site{background:var(--sun);color:var(--on-sun)}
+.gantt-legend{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:22px;font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.gantt-legend span{display:inline-flex;align-items:center;gap:8px}
+.gantt-legend i{width:22px;height:10px;border-radius:999px;background:var(--ink)}
+.gantt-legend i.w{background:repeating-linear-gradient(-45deg,var(--ink) 0 1.5px,transparent 1.5px 5px);border:1px solid var(--ink)}
+.gantt-legend i.s{background:var(--sun)}
+
+/* ---------- témoignages ---------- */
+.quotes .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
+.quotes .label{grid-column:1 / span 3;padding-top:.8em}
+.quote-stage{grid-column:4 / -1;display:grid}
+.quote{grid-area:1 / 1;opacity:0;visibility:hidden;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease),visibility 0s .9s}
+.quote.is-active{opacity:1;visibility:visible;transform:none;transition:opacity .9s var(--ease) .15s,transform .9s var(--ease) .15s,visibility 0s}
+.quote blockquote p{font-family:var(--f-display);font-weight:400;font-size:clamp(2rem,1.2rem + 3.4vw,4.8rem);line-height:.98;text-wrap:balance;max-width:20em}
+.quote figcaption{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:clamp(24px,3vw,40px);font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.quote figcaption strong{color:var(--ink);font-weight:500}
+.quote-nav{grid-column:4 / -1;display:flex;align-items:center;gap:18px;margin-top:clamp(36px,4vw,56px)}
+.quote-progress{position:relative;flex:1;height:1px;background:var(--line);overflow:hidden}
+.quote-progress i{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left}
+.quote-count{font-family:var(--f-mono);font-size:var(--step--1);color:var(--muted);font-variant-numeric:tabular-nums;min-width:4ch;text-align:center}
+.icon-btn{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:none;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.icon-btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.icon-btn svg{width:18px;height:18px}
+
+/* ---------- contact ---------- */
+.contact{background:var(--surface)}
+.contact-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:56px 24px}
+.contact-intro{grid-column:1 / span 5;display:flex;flex-direction:column;gap:28px}
+.contact-title{font-family:var(--f-display);font-size:var(--step-4);font-weight:800;line-height:.82;text-transform:uppercase}
+.contact-intro > p{max-width:40ch;color:var(--muted);text-wrap:pretty}
+.mail-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.mail{font-size:var(--step-1);font-weight:600;letter-spacing:-.01em;user-select:all;-webkit-user-select:all;word-break:break-all}
+.contact-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding-top:24px;border-top:1px solid var(--line);font-style:normal}
+.contact-facts p{font-size:.95rem;line-height:1.5}
+.contact-facts .label{margin-bottom:6px}
+.brief{grid-column:7 / -1;min-width:0}
+.brief fieldset{border:0;padding:0;margin:0 0 30px;min-width:0}
+.brief legend{padding:0;margin-bottom:14px}
+.chip{position:relative;display:inline-flex}
+.chip input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.chip span{display:inline-flex;align-items:center;padding:10px 16px;border:1px solid var(--line);border-radius:999px;font-size:.95rem;line-height:1.2;cursor:pointer;transition:background .3s,color .3s,border-color .3s;user-select:none}
+.chip:hover span{border-color:var(--ink)}
+.chip input:checked + span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip input:focus-visible + span{outline:2px solid var(--accent);outline-offset:3px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 28px}
+.field{position:relative;min-width:0}
+.field-full{grid-column:1 / -1}
+.field input,.field textarea{width:100%;padding:28px 0 10px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;color:var(--ink);font-size:var(--step-1);transition:border-color .3s}
+.field textarea{min-height:132px;resize:vertical;line-height:1.45}
+.field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--ink)}
+.field input:focus-visible,.field textarea:focus-visible{box-shadow:0 2px 0 0 var(--accent)}
+.field label{position:absolute;left:0;top:30px;color:var(--muted);font-size:var(--step-1);pointer-events:none;transition:top .4s var(--ease),font-size .4s var(--ease),letter-spacing .4s}
+.field input:focus + label,.field input:not(:placeholder-shown) + label,.field textarea:focus + label,.field textarea:not(:placeholder-shown) + label{top:4px;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
+.field input[aria-invalid="true"],.field textarea[aria-invalid="true"]{border-bottom-color:var(--danger)}
+.err{min-height:1.4em;padding-top:6px;color:var(--danger);font-size:.85rem}
+.submit-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;margin-top:24px}
+.submit-row p{font-family:var(--f-mono);font-size:var(--step--1);color:var(--muted);max-width:34ch;line-height:1.5}
+.brief-out{border-top:1px solid var(--ink);padding-top:28px;display:grid;gap:20px}
+.brief-out h3{font-family:var(--f-display);font-size:var(--step-2);font-weight:800;text-transform:uppercase;line-height:.95}
+.brief-out h3:focus{outline:none}
+.brief-out pre{margin:0;padding:22px;border-radius:4px;background:var(--paper);border:1px solid var(--line);font-family:var(--f-mono);font-size:.85rem;line-height:1.65;white-space:pre-wrap;word-break:break-word;max-height:360px;overflow:auto}
+.brief-actions{display:flex;flex-wrap:wrap;gap:10px}
+
+/* ---------- pied de page ---------- */
+.footer{background:var(--sun);color:var(--on-sun);overflow:hidden;padding-top:clamp(72px,9vw,140px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 22px)}
+.footer :focus-visible{outline-color:var(--on-sun)}
+.footer .h2 em,.footer-cta em{color:var(--on-sun)}
+.footer-top{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:48px 24px}
+.footer-cta{grid-column:1 / span 6;display:flex;flex-direction:column;align-items:flex-start;gap:28px}
+.footer-cta .h2{max-width:11ch}
+.footer-cta .btn{border-color:currentColor;color:inherit}
+.footer-cta .btn:hover{background:var(--on-sun);color:var(--sun)}
+.footer-cols{grid-column:8 / -1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 24px;align-content:start}
+.footer-cols h3{font-family:var(--f-mono);font-size:var(--step--1);font-weight:400;text-transform:uppercase;letter-spacing:.08em;opacity:.7;margin-bottom:12px}
+.footer-cols p,.footer-cols li{font-size:.98rem;line-height:1.55}
+.footer-cols a{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100% / 0 1px no-repeat;transition:background-size .5s var(--ease)}
+.footer-cols a:hover{background-size:100% 1px}
+.wordmark{margin-top:clamp(56px,8vw,128px);font-family:var(--f-display);line-height:.76;white-space:nowrap;font-weight:900;text-transform:uppercase;font-size:20vw;user-select:none;-webkit-user-select:none}
+.wordmark .wm-inner{display:inline-block}
+.wordmark span span{display:inline-block;transition:font-weight .6s var(--ease)}
+.footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;margin-top:clamp(22px,3vw,40px);padding-top:18px;border-top:1px solid color-mix(in srgb,var(--on-sun) 30%,var(--sun));font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.06em}
+.footer-bottom a{text-decoration:none}
+.footer-bottom a:hover{text-decoration:underline}
+
+/* ---------- fiche projet ---------- */
+.case{position:fixed;inset:0;width:100%;height:100%;max-width:100%;max-height:100%;margin:0;padding:0;border:0;background:var(--paper);color:var(--ink);overflow-y:auto;overscroll-behavior:contain}
+.case::backdrop{background:transparent}
+.case[open]{animation:caseIn 1s var(--ease) both}
+.case.is-closing{animation:caseOut .55s cubic-bezier(.7,0,.84,0) both}
+@keyframes caseIn{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes caseOut{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 0 100% 0)}}
+.case-bar{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:calc(env(safe-area-inset-top,0px) + 16px);padding-bottom:16px;padding-left:var(--gl);padding-right:var(--gr);background:var(--paper);border-bottom:1px solid var(--line)}
+.case-cover{position:relative;height:min(64svh,720px);min-height:280px;overflow:hidden;background:var(--surface)}
+.case-cover canvas{width:100%;height:100%}
+.case-body{padding-block:clamp(40px,6vw,96px) clamp(56px,7vw,112px)}
+.case-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:36px 24px}
+.case-title{grid-column:1 / -1;font-family:var(--f-display);font-size:var(--step-4);font-weight:800;line-height:.82;text-transform:uppercase}
+.case-intro{grid-column:1 / span 8;font-size:var(--step-2);font-family:var(--f-body);font-weight:500;line-height:1.15;letter-spacing:-.02em;text-wrap:pretty}
+.case-facts{grid-column:1 / span 3;display:grid;gap:18px;align-content:start}
+.case-facts dt{font-family:var(--f-mono);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.case-facts dd{margin-top:2px}
+.case-text{grid-column:5 / -1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.case-text h3{font-family:var(--f-mono);font-size:var(--step--1);font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:10px}
+.case-text p{text-wrap:pretty}
+.case-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(48px,6vw,88px);border-top:1px solid var(--line)}
+.case-results li{padding:24px 20px 0 0}
+.case-results li + li{padding-left:20px;border-left:1px solid var(--line)}
+.case-results strong{display:block;font-family:var(--f-display);font-weight:800;font-size:var(--step-3);line-height:.84;margin-bottom:12px}
+.case-results span{color:var(--muted)}
+.case-next{display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:100%;margin-top:clamp(56px,7vw,112px);padding:28px 0 0;border:0;border-top:1px solid var(--ink);background:none;text-align:left;cursor:pointer}
+.case-next-name{font-family:var(--f-display);font-size:var(--step-4);font-weight:300;text-transform:uppercase;line-height:.84;transition:font-weight .8s var(--ease),color .4s}
+.case-next:hover .case-next-name{font-weight:850;color:var(--accent)}
+
+/* ---------- curseur ---------- */
+.cursor{display:none}
+html.has-cursor .cursor{display:block}
+html.has-cursor,html.has-cursor a,html.has-cursor button,html.has-cursor label,html.has-cursor .work-open{cursor:none}
+html.has-cursor input[type="range"]{cursor:none}
+.cursor-dot,.cursor-ring{position:fixed;left:0;top:0;z-index:240;pointer-events:none;border-radius:50%}
+.cursor-dot{width:6px;height:6px;margin:-3px 0 0 -3px;background:#fff;mix-blend-mode:difference}
+.cursor-ring{width:40px;height:40px;margin:-20px 0 0 -20px;border:1px solid #fff;mix-blend-mode:difference;display:grid;place-items:center;transition:width .55s var(--ease),height .55s var(--ease),margin .55s var(--ease),opacity .3s,background .3s,border-color .3s}
+.cursor-ring span{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;opacity:0;transition:opacity .3s}
+.cursor-ring.is-link{width:64px;height:64px;margin:-32px 0 0 -32px}
+.cursor-ring.is-big{width:108px;height:108px;margin:-54px 0 0 -54px;mix-blend-mode:normal;background:var(--sun);border-color:var(--sun);color:var(--on-sun)}
+.cursor-ring.is-big span{opacity:1}
+.cursor-ring.is-hidden,.cursor-dot.is-hidden{opacity:0}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .nav-links{display:none}
+  .hero-lede{grid-column:1 / span 5}
+  .hero-cta{grid-column:6 / span 2}
+  .hud{grid-column:8 / -1}
+}
+@media (max-width:900px){
+  .nav-clock,.nav-cta{display:none}
+  .menu-btn{display:inline-flex}
+  .sec-head .label,.sec-head .h2,.sec-intro,.sec-note{grid-column:1 / -1}
+  .manifesto .label,.manifesto-text,.facts{grid-column:1 / -1}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}
+  .hero-title{font-size:clamp(3.6rem,17vw,9rem);margin-top:clamp(240px,78vw,520px)}
+  .hero-lede{grid-column:1 / -1}
+  .hero-cta{grid-column:1 / span 4;justify-self:start}
+  .hud{grid-column:5 / -1;justify-self:stretch;width:auto}
+  .svc-row{grid-template-columns:minmax(0,1fr) 44px}
+  .svc-tag{grid-row:2;grid-column:1;text-align:left}
+  .svc-icon{grid-row:1 / span 2;grid-column:2}
+  .svc-content p,.svc-content .chips,.svc-content .svc-facts{grid-column:1 / -1}
+  .metrics{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:44px}
+  .metric:nth-child(3){padding-left:0;border-left:0}
+  .gantt-axis,.gantt-row{grid-template-columns:0 repeat(18,minmax(0,1fr))}
+  .gantt-axis .gantt-corner{visibility:hidden}
+  .gantt-axis span{padding-left:2px;font-size:.56rem}
+  .gantt-axis span i{display:none}
+  .gantt-row{row-gap:12px}
+  .gantt-label{grid-column:1 / -1;grid-row:1}
+  .gantt-track,.gantt-bar{grid-row:2}
+  .gantt-track{margin-block:-6px -14px}
+  .gantt-bar{height:32px;padding-inline:7px;font-size:.58rem;letter-spacing:0}
+  .quotes .label,.quote-stage,.quote-nav{grid-column:1 / -1}
+  .contact-intro,.brief{grid-column:1 / -1}
+  .footer-cta,.footer-cols{grid-column:1 / -1}
+  .case-intro,.case-facts,.case-text{grid-column:1 / -1}
+  .case-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  :root{--marquee-h:66px}
+  .hero-cta{grid-column:1 / -1}
+  .hud{grid-column:1 / -1}
+  .work-meta{grid-template-columns:minmax(0,1fr)}
+  .work-tags{grid-column:1;grid-row:auto;justify-content:flex-start;max-width:none}
+  .metrics{grid-template-columns:minmax(0,1fr)}
+  .metric,.metric + .metric{padding-left:0;border-left:0}
+  .metric + .metric{border-top:1px solid var(--b-line)}
+  .metric-desc{min-height:0}
+  .fields{grid-template-columns:minmax(0,1fr)}
+  .contact-facts{grid-template-columns:minmax(0,1fr)}
+  .case-text{grid-template-columns:minmax(0,1fr)}
+  .case-results{grid-template-columns:minmax(0,1fr)}
+  .case-results li + li{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  .footer-cols{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  body::after{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="loader" aria-hidden="true">
+  <div class="loader-stage">
+    <svg class="loader-arc" viewBox="-8 -4 216 112">
+      <path class="arc-track" d="M4 100 A96 96 0 0 1 196 100"/>
+      <path class="arc-fill" d="M4 100 A96 96 0 0 1 196 100" pathLength="1"/>
+      <line x1="-8" y1="100" x2="208" y2="100"/>
+      <circle class="arc-sun" r="6" cx="4" cy="100"/>
+    </svg>
+  </div>
+  <div class="loader-inner wrap">
+    <p class="loader-brand"><svg viewBox="0 0 32 32"><path d="M2.5 23.5h27" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M7 23.5a9 9 0 0 1 18 0" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="21.8" cy="16.6" r="3.2" fill="currentColor"/></svg>Solstice</p>
+    <p class="loader-count" id="loader-num">000</p>
+    <div class="loader-bar"><i></i></div>
+  </div>
+</div>
+
+<a class="skip" href="#atelier">Aller au contenu</a>
+
+<nav class="nav" aria-label="Navigation principale">
+  <a class="logo" href="#top" aria-label="Solstice Architectes, retour en haut de page">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2.5 23.5h27" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M7 23.5a9 9 0 0 1 18 0" fill="none" stroke="currentColor" stroke-width="2.2"/><circle class="logo-sun" cx="21.8" cy="16.6" r="3.2" fill="currentColor"/></svg>
+    <span>Solstice</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#atelier">Atelier</a></li>
+    <li><a href="#projets">Projets<sup>05</sup></a></li>
+    <li><a href="#savoir-faire">Savoir-faire</a></li>
+    <li><a href="#demarche">Démarche</a></li>
+  </ul>
+  <div class="nav-right">
+    <p class="nav-clock">Bordeaux <time data-clock>--:--:--</time></p>
+    <a class="nav-cta" href="#contact">Parler de votre projet</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><i aria-hidden="true"></i><span>Menu</span></button>
+  </div>
+</nav>
+
+<div class="menu" id="menu" inert data-lenis-prevent>
+  <ul>
+    <li><a href="#atelier">Atelier <small>Notre regard</small></a></li>
+    <li><a href="#projets">Projets <small>5 réalisations</small></a></li>
+    <li><a href="#savoir-faire">Savoir-faire <small>5 métiers</small></a></li>
+    <li><a href="#demarche">Démarche <small>18 mois</small></a></li>
+    <li><a href="#contact">Contact <small>Sous une semaine</small></a></li>
+  </ul>
+  <div class="menu-foot"><p>atelier@solstice-architectes.fr</p><p>Bordeaux <time data-clock>--:--:--</time></p></div>
+</div>
+
+<main>
+  <header class="hero" id="top">
+    <canvas class="hero-gl" aria-hidden="true"></canvas>
+    <div class="hero-fallback" aria-hidden="true"></div>
+    <div class="hero-inner wrap">
+      <p class="eyebrow"><span>Atelier d’architecture</span><span>Bordeaux</span><span class="eyebrow-dot"><i class="dot" aria-hidden="true"></i>Nouveaux projets dès mars 2027</span></p>
+      <h1 class="hero-title" aria-label="Bâtir avec la lumière.">
+        <span class="line" aria-hidden="true"><span class="line-in">Bâtir avec</span></span>
+        <span class="line" aria-hidden="true"><span class="line-in"><em>la lumière.</em></span></span>
+      </h1>
+      <div class="hero-foot">
+        <p class="hero-lede">Solstice dessine des maisons, des logements et des équipements publics en bois et en matériaux biosourcés, à partir de la course du soleil sur chaque terrain.</p>
+        <a class="btn-round hero-cta magnetic" href="#projets" data-cursor="Voir"><span>Voir les<br>projets</span></a>
+        <section class="hud" aria-label="Étude d’ensoleillement interactive">
+          <div class="hud-top">
+            <div><p class="hud-title">Étude d’ensoleillement</p><p>Bordeaux · 44,84° N · 21 juin</p></div>
+            <svg class="compass" viewBox="0 0 44 44" aria-hidden="true">
+              <circle cx="22" cy="22" r="18" fill="none" stroke="currentColor" stroke-opacity=".35"/>
+              <path d="M22 1.5v5M22 37.5v5M1.5 22h5M37.5 22h5" stroke="currentColor" stroke-opacity=".55"/>
+              <text x="22" y="16" text-anchor="middle" font-size="7" fill="currentColor" font-family="IBM Plex Mono, monospace">N</text>
+              <g id="compass-sun"><line class="c-sun" x1="22" y1="22" x2="22" y2="8" stroke-width="1.4"/><circle class="c-sun" cx="22" cy="7" r="3.4"/></g>
+              <circle cx="22" cy="22" r="1.6" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="hud-mid">
+            <output class="hud-time" id="sun-clock" for="sun-time">16:30</output>
+            <dl class="hud-data"><div><dt>Azimut</dt><dd id="sun-az">—</dd></div><div><dt>Hauteur</dt><dd id="sun-alt">—</dd></div></dl>
+          </div>
+          <div class="hud-controls">
+            <button class="hud-play" type="button" id="sun-play" aria-pressed="true">
+              <svg class="i-pause" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="2.6" height="10" fill="currentColor"/><rect x="7.4" y="1" width="2.6" height="10" fill="currentColor"/></svg>
+              <svg class="i-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 1l8 5-8 5z" fill="currentColor"/></svg>
+              <span class="sr-only">Mettre en pause la course du soleil</span>
+            </button>
+            <label class="sr-only" for="sun-time">Heure de la journée, le 21 juin à Bordeaux</label>
+            <input type="range" id="sun-time" min="330" max="1350" step="1" value="990">
+          </div>
+          <div class="hud-scale" aria-hidden="true"><span>05:30</span><span>Midi solaire 14:04</span><span>22:30</span></div>
+        </section>
+      </div>
+    </div>
+  </header>
+
+  <div class="marquee" role="region" aria-label="Domaines de l’atelier">
+    <div class="marquee-track">
+      <ul class="marquee-group">
+        <li><span>Maisons individuelles</span><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2.5 23.5h27" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M7 23.5a9 9 0 0 1 18 0" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="21.8" cy="16.6" r="3.4" style="fill:var(--sun)"/></svg></li>
+        <li><span>logements collectifs</span><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2.5 23.5h27" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M7 23.5a9 9 0 0 1 18 0" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="21.8" cy="16.6" r="3.4" style="fill:var(--sun)"/></svg></li>
+        <li><span>Équipements publics</span><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2.5 23.5h27" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M7 23.5a9 9 0 0 1 18 0" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="21.8" cy="16.6" r="3.4" style="fill:var(--sun)"/></svg></li>
+        <li><span>réhabilitation</span><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2.5 23.5h27" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M7 23.5a9 9 0 0 1 18 0" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="21.8" cy="16.6" r="3.4" style="fill:var(--sun)"/></svg></li>
+        <li><span>Construction bois</span><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2.5 23.5h27" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M7 23.5a9 9 0 0 1 18 0" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="21.8" cy="16.6" r="3.4" style="fill:var(--sun)"/></svg></li>
+        <li><span>paysage</span><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2.5 23.5h27" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M7 23.5a9 9 0 0 1 18 0" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="21.8" cy="16.6" r="3.4" style="fill:var(--sun)"/></svg></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="section manifesto" id="atelier" aria-labelledby="atelier-title">
+    <div class="wrap grid">
+      <p class="label" id="atelier-title">(L’atelier)</p>
+      <p class="manifesto-text" data-words>Un bâtiment réussi se reconnaît à la lumière qu’il laisse entrer et à celle qu’il sait arrêter. Avant le premier trait, nous passons du temps sur le terrain pour observer le soleil, le vent et les usages. Nous dessinons ensuite des lieux sobres, durables et <em>faits pour être habités.</em></p>
+      <dl class="facts" data-reveal>
+        <div><dt>Année de création</dt><dd>2012</dd></div>
+        <div><dt>Architectes et paysagistes</dt><dd>11</dd></div>
+        <div><dt>Bâtiments livrés</dt><dd>64</dd></div>
+        <div><dt>Prix d’architecture</dt><dd>9</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="works" id="projets" aria-labelledby="works-title">
+    <div class="works-inner">
+      <div class="wrap works-head">
+        <div>
+          <p class="label">(Projets choisis)</p>
+          <h2 class="h2" id="works-title">Des lieux <em>à habiter.</em></h2>
+        </div>
+        <div class="works-meta">
+          <span>Sélection 2023–2026</span>
+          <span>5 projets sur 64</span>
+          <span class="hint">Défilez pour parcourir&nbsp;→</span>
+        </div>
+      </div>
+      <div class="works-viewport">
+        <div class="works-track">
+          <article class="work" data-work="tilleul">
+            <div class="work-cover" style="--fb:linear-gradient(180deg,#D3DCDD,#E9E6DF)"><canvas aria-hidden="true"></canvas><span class="work-badge">2025</span></div>
+            <div class="work-meta">
+              <h3 class="work-title">Maison Tilleul</h3>
+              <p class="work-sub">Maison individuelle, Cap-Ferret</p>
+              <p class="work-tags"><span>Bois</span><span>168 m²</span></p>
+            </div>
+            <button class="work-open" type="button" data-cursor="Ouvrir"><span class="sr-only">Ouvrir la fiche du projet Maison Tilleul</span></button>
+          </article>
+          <article class="work" data-work="tanneurs">
+            <div class="work-cover" style="--fb:#E6E0D3"><canvas aria-hidden="true"></canvas><span class="work-badge">2024</span></div>
+            <div class="work-meta">
+              <h3 class="work-title">Médiathèque des Tanneurs</h3>
+              <p class="work-sub">Équipement culturel, Dordogne</p>
+              <p class="work-tags"><span>Réhabilitation</span><span>2 400 m²</span></p>
+            </div>
+            <button class="work-open" type="button" data-cursor="Ouvrir"><span class="sr-only">Ouvrir la fiche du projet Médiathèque des Tanneurs</span></button>
+          </article>
+          <article class="work" data-work="cedres">
+            <div class="work-cover" style="--fb:#D6DCD3"><canvas aria-hidden="true"></canvas><span class="work-badge">2025</span></div>
+            <div class="work-meta">
+              <h3 class="work-title">Les Cèdres</h3>
+              <p class="work-sub">42 logements, Bordeaux</p>
+              <p class="work-tags"><span>Biosourcé</span><span>3 150 m²</span></p>
+            </div>
+            <button class="work-open" type="button" data-cursor="Ouvrir"><span class="sr-only">Ouvrir la fiche du projet Les Cèdres</span></button>
+          </article>
+          <article class="work" data-work="cretes">
+            <div class="work-cover" style="--fb:#17191B"><canvas aria-hidden="true"></canvas><span class="work-badge">2023</span></div>
+            <div class="work-meta">
+              <h3 class="work-title">Refuge des Crêtes</h3>
+              <p class="work-sub">Refuge de montagne, Pyrénées</p>
+              <p class="work-tags"><span>Préfabrication</span><span>2 180 m</span></p>
+            </div>
+            <button class="work-open" type="button" data-cursor="Ouvrir"><span class="sr-only">Ouvrir la fiche du projet Refuge des Crêtes</span></button>
+          </article>
+          <article class="work" data-work="saintroch">
+            <div class="work-cover" style="--fb:#E3E3DF"><canvas aria-hidden="true"></canvas><span class="work-badge">2024</span></div>
+            <div class="work-meta">
+              <h3 class="work-title">Halle Saint-Roch</h3>
+              <p class="work-sub">Marché couvert, Bayonne</p>
+              <p class="work-tags"><span>Réemploi</span><span>1 900 m²</span></p>
+            </div>
+            <button class="work-open" type="button" data-cursor="Ouvrir"><span class="sr-only">Ouvrir la fiche du projet Halle Saint-Roch</span></button>
+          </article>
+          <article class="work work-end">
+            <a class="end-link" href="#contact" data-cursor="Écrire">
+              <span class="end-num">64</span>
+              <span class="end-text">bâtiments livrés depuis 2012. Le prochain se dessine peut-être sur votre terrain.</span>
+              <span class="end-arrow">Parlons-en&nbsp;→</span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section services" id="savoir-faire" aria-labelledby="svc-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">(Savoir-faire)</p>
+        <h2 class="h2" id="svc-title" data-reveal>Cinq métiers, <em>un même atelier.</em></h2>
+        <p class="sec-intro" data-reveal>Architectes, paysagistes et architectes d’intérieur travaillent sur la même table. L’architecte qui dessine votre esquisse suit aussi votre chantier.</p>
+      </div>
+      <ul class="svc-list" data-reveal>
+        <li class="svc is-open">
+          <button class="svc-row" type="button" aria-expanded="true" aria-controls="svc-1">
+            <span class="svc-name">Architecture</span><span class="svc-tag">Construction neuve</span><span class="svc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="svc-body" id="svc-1"><div><div class="svc-content">
+            <p>Maisons, logements collectifs et équipements publics, de l’esquisse à la remise des clés, en mission complète.</p>
+            <ul class="chips"><li>Mission complète</li><li>Permis de construire</li><li>Suivi de chantier</li><li>Concours publics</li></ul>
+            <p class="svc-facts"><b>Honoraires</b>9 à 13 % du montant des travaux</p>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <button class="svc-row" type="button" aria-expanded="false" aria-controls="svc-2">
+            <span class="svc-name">Réhabilitation</span><span class="svc-tag">Transformer l’existant</span><span class="svc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="svc-body" id="svc-2"><div><div class="svc-content">
+            <p>Diagnostic, conservation de ce qui peut l’être, puis transformation. Nous réemployons les matériaux du site dès que c’est possible.</p>
+            <ul class="chips"><li>Diagnostic du bâti</li><li>Réemploi</li><li>Rénovation énergétique</li><li>Surélévation</li></ul>
+            <p class="svc-facts"><b>Diagnostic</b>3 à 6 semaines</p>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <button class="svc-row" type="button" aria-expanded="false" aria-controls="svc-3">
+            <span class="svc-name">Biosourcé</span><span class="svc-tag">Bois, paille, terre</span><span class="svc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="svc-body" id="svc-3"><div><div class="svc-content">
+            <p>Ossature et structure bois, isolants en fibre de bois, en paille ou en chanvre. Nous travaillons avec des entreprises installées à moins de 150 km du chantier.</p>
+            <ul class="chips"><li>Ossature bois</li><li>Panneaux CLT</li><li>Isolation paille</li><li>Terre crue</li></ul>
+            <p class="svc-facts"><b>Filière locale</b>Partenaires à moins de 150 km</p>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <button class="svc-row" type="button" aria-expanded="false" aria-controls="svc-4">
+            <span class="svc-name">Intérieur</span><span class="svc-tag">Aménagement &amp; mobilier</span><span class="svc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="svc-body" id="svc-4"><div><div class="svc-content">
+            <p>Agencements sur mesure, choix des matériaux et de la lumière naturelle, mobilier dessiné avec des ébénistes de la région.</p>
+            <ul class="chips"><li>Agencement</li><li>Matériaux</li><li>Éclairage naturel</li><li>Mobilier</li></ul>
+            <p class="svc-facts"><b>Dès l’avant-projet</b>pour éviter les reprises</p>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <button class="svc-row" type="button" aria-expanded="false" aria-controls="svc-5">
+            <span class="svc-name">Paysage</span><span class="svc-tag">Le terrain d’abord</span><span class="svc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="svc-body" id="svc-5"><div><div class="svc-content">
+            <p>Relevé du site, gestion de l’eau de pluie, plantations locales et îlots de fraîcheur. Le jardin se dessine en même temps que le bâtiment.</p>
+            <ul class="chips"><li>Relevé du site</li><li>Gestion de l’eau</li><li>Essences locales</li><li>Îlots de fraîcheur</li></ul>
+            <p class="svc-facts"><b>Intégré</b>à chaque projet d’architecture</p>
+          </div></div></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section perf" id="sobriete" aria-labelledby="perf-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">(Sobriété)</p>
+        <h2 class="h2" id="perf-title" data-reveal>La sobriété <em>se mesure.</em></h2>
+        <p class="sec-intro" data-reveal>Chaque projet est calculé selon la RE2020 dès l’esquisse. Voici nos résultats moyens, comparés aux seuils réglementaires.</p>
+        <p class="sec-note">Moyenne de nos 12 dernières maisons individuelles livrées entre 2023 et 2026. Calculs réglementaires RE2020.</p>
+      </div>
+      <div class="metrics">
+        <article class="metric" data-value="392" data-decimals="0">
+          <h3 class="metric-name">Ic construction</h3>
+          <p class="metric-desc">Carbone émis pour construire, sur 50 ans</p>
+          <p class="metric-value"><span class="num">392</span><span class="unit">kgCO₂eq/m²</span></p>
+          <div class="gauge" role="img" aria-label="392 kilogrammes équivalent CO₂ par mètre carré, sur une échelle de 0 à 800, seuil RE2020 2025 à 530"><i class="gauge-fill" style="width:49%"></i><i class="gauge-mark" style="left:66.25%"></i></div>
+          <p class="gauge-legend">Seuil RE2020 2025 ≤ 530 · échelle 0–800</p>
+        </article>
+        <article class="metric" data-value="24" data-decimals="0">
+          <h3 class="metric-name">Cep,nr</h3>
+          <p class="metric-desc">Énergie primaire non renouvelable consommée</p>
+          <p class="metric-value"><span class="num">24</span><span class="unit">kWhep/m²/an</span></p>
+          <div class="gauge" role="img" aria-label="24 kilowattheures d’énergie primaire par mètre carré et par an, sur une échelle de 0 à 100, seuil à 55"><i class="gauge-fill" style="width:24%"></i><i class="gauge-mark" style="left:55%"></i></div>
+          <p class="gauge-legend">Seuil RE2020 ≤ 55 · échelle 0–100</p>
+        </article>
+        <article class="metric" data-value="38" data-decimals="0">
+          <h3 class="metric-name">Bbio</h3>
+          <p class="metric-desc">Besoin bioclimatique : chauffage, froid et éclairage</p>
+          <p class="metric-value"><span class="num">38</span><span class="unit">points</span></p>
+          <div class="gauge" role="img" aria-label="38 points sur une échelle de 0 à 100, seuil à 63"><i class="gauge-fill" style="width:38%"></i><i class="gauge-mark" style="left:63%"></i></div>
+          <p class="gauge-legend">Seuil RE2020 ≤ 63 · échelle 0–100</p>
+        </article>
+        <article class="metric" data-value="210" data-decimals="0">
+          <h3 class="metric-name">DH</h3>
+          <p class="metric-desc">Inconfort d’été, en degrés-heures</p>
+          <p class="metric-value"><span class="num">210</span><span class="unit">°C·h</span></p>
+          <div class="gauge" role="img" aria-label="210 degrés-heures sur une échelle de 0 à 1 500, seuil à 1 250"><i class="gauge-fill" style="width:14%"></i><i class="gauge-mark" style="left:83.3%"></i></div>
+          <p class="gauge-legend">Seuil RE2020 ≤ 1 250 · échelle 0–1 500</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section method" id="demarche" aria-labelledby="method-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">(Démarche)</p>
+        <h2 class="h2" id="method-title" data-reveal>Dix-huit mois, <em>de l’esquisse aux clés.</em></h2>
+        <p class="sec-intro" data-reveal>Le calendrier type d’une maison neuve. L’instruction du permis de construire dure en général deux à trois mois : nous préparons le projet détaillé pendant ce temps.</p>
+      </div>
+      <div class="gantt">
+        <div class="gantt-axis" aria-hidden="true">
+          <span class="gantt-corner">Mois</span>
+          <span><i>M</i>1</span><span><i>M</i>2</span><span><i>M</i>3</span><span><i>M</i>4</span><span><i>M</i>5</span><span><i>M</i>6</span><span><i>M</i>7</span><span><i>M</i>8</span><span><i>M</i>9</span><span><i>M</i>10</span><span><i>M</i>11</span><span><i>M</i>12</span><span><i>M</i>13</span><span><i>M</i>14</span><span><i>M</i>15</span><span><i>M</i>16</span><span><i>M</i>17</span><span><i>M</i>18</span>
+        </div>
+        <ol class="gantt-rows">
+          <li class="gantt-row">
+            <div class="gantt-label"><b>1</b><div><strong>Esquisse</strong><span>Relevé, étude solaire, premières intentions</span></div></div>
+            <div class="gantt-track" aria-hidden="true"></div>
+            <div class="gantt-bar" style="grid-column:2 / 4"><span>M1–M2</span></div>
+          </li>
+          <li class="gantt-row">
+            <div class="gantt-label"><b>2</b><div><strong>Avant-projet</strong><span>APS et APD, matériaux, estimation</span></div></div>
+            <div class="gantt-track" aria-hidden="true"></div>
+            <div class="gantt-bar" style="grid-column:3 / 6"><span>M2–M4</span></div>
+          </li>
+          <li class="gantt-row">
+            <div class="gantt-label"><b>3</b><div><strong>Permis de construire</strong><span>Dépôt et instruction en mairie</span></div></div>
+            <div class="gantt-track" aria-hidden="true"></div>
+            <div class="gantt-bar is-wait" style="grid-column:5 / 8"><span>M4–M6</span></div>
+          </li>
+          <li class="gantt-row">
+            <div class="gantt-label"><b>4</b><div><strong>Projet &amp; consultation</strong><span>PRO, DCE, choix des entreprises</span></div></div>
+            <div class="gantt-track" aria-hidden="true"></div>
+            <div class="gantt-bar" style="grid-column:7 / 10"><span>M6–M8</span></div>
+          </li>
+          <li class="gantt-row">
+            <div class="gantt-label"><b>5</b><div><strong>Chantier</strong><span>Direction et suivi des travaux</span></div></div>
+            <div class="gantt-track" aria-hidden="true"></div>
+            <div class="gantt-bar is-site" style="grid-column:10 / 19"><span>M9–M17</span></div>
+          </li>
+          <li class="gantt-row">
+            <div class="gantt-label"><b>6</b><div><strong>Réception</strong><span>Levée des réserves, remise des clés</span></div></div>
+            <div class="gantt-track" aria-hidden="true"></div>
+            <div class="gantt-bar" style="grid-column:19 / 20"><span>M18</span></div>
+          </li>
+        </ol>
+        <p class="gantt-legend" aria-hidden="true"><span><i></i>Études de l’atelier</span><span><i class="w"></i>Instruction administrative</span><span><i class="s"></i>Travaux sur site</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quotes" aria-labelledby="quotes-title">
+    <div class="wrap grid">
+      <p class="label" id="quotes-title">(Ils y vivent)</p>
+      <div class="quote-stage" data-reveal>
+        <figure class="quote is-active">
+          <blockquote><p>«&nbsp;Ils ont passé une journée entière sur le terrain avant de dessiner quoi que ce soit. Trois hivers plus tard, nous ne chauffons presque plus la maison.&nbsp;»</p></blockquote>
+          <figcaption><strong>Camille et Julien Arrieta</strong><span>Propriétaires, Maison Tilleul</span></figcaption>
+        </figure>
+        <figure class="quote" aria-hidden="true">
+          <blockquote><p>«&nbsp;Une équipe qui écoute les usagers autant que les élus. La médiathèque est devenue le lieu que tout le monde s’approprie.&nbsp;»</p></blockquote>
+          <figcaption><strong>Hélène Darrigrand</strong><span>Directrice, Médiathèque des Tanneurs</span></figcaption>
+        </figure>
+        <figure class="quote" aria-hidden="true">
+          <blockquote><p>«&nbsp;Délais tenus, budget respecté, et un bâtiment qui a convaincu les futurs habitants dès la première maquette.&nbsp;»</p></blockquote>
+          <figcaption><strong>Marc Etchebest</strong><span>Directeur de programmes, Les Cèdres</span></figcaption>
+        </figure>
+      </div>
+      <div class="quote-nav">
+        <button class="icon-btn" type="button" data-quote="prev" aria-label="Témoignage précédent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button class="icon-btn" type="button" data-quote="next" aria-label="Témoignage suivant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <div class="quote-progress" aria-hidden="true"><i></i></div>
+        <span class="quote-count">1 / 3</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap contact-grid">
+      <div class="contact-intro">
+        <p class="label">(Contact)</p>
+        <h2 class="contact-title" id="contact-title" data-reveal>Un projet <em>de construction&nbsp;?</em></h2>
+        <p>Décrivez votre terrain et votre projet. Un architecte associé vous rappelle sous une semaine pour un premier échange d’une heure, sans engagement.</p>
+        <div class="mail-row">
+          <span class="mail" id="mail">atelier@solstice-architectes.fr</span>
+          <button class="btn" type="button" data-copy="atelier@solstice-architectes.fr" data-select="mail">Copier</button>
+        </div>
+        <address class="contact-facts">
+          <div><p class="label">Atelier</p><p>18 quai des Chartrons<br>33000 Bordeaux</p></div>
+          <div><p class="label">Horaires</p><p>Lundi au vendredi<br>9&nbsp;h – 18&nbsp;h</p></div>
+        </address>
+      </div>
+
+      <div class="brief">
+        <form id="brief-form" novalidate>
+          <fieldset>
+            <legend class="label">Votre projet</legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="type" value="Maison neuve" id="t-new" checked><span>Maison neuve</span></label>
+              <label class="chip"><input type="checkbox" name="type" value="Extension" id="t-ext"><span>Extension</span></label>
+              <label class="chip"><input type="checkbox" name="type" value="Rénovation" id="t-reno"><span>Rénovation</span></label>
+              <label class="chip"><input type="checkbox" name="type" value="Logements collectifs" id="t-coll"><span>Logements collectifs</span></label>
+              <label class="chip"><input type="checkbox" name="type" value="Équipement public" id="t-pub"><span>Équipement public</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="label">Surface envisagée</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="surface" value="Moins de 100 m²" id="s-1"><span>&lt; 100&nbsp;m²</span></label>
+              <label class="chip"><input type="radio" name="surface" value="100 à 200 m²" id="s-2" checked><span>100–200&nbsp;m²</span></label>
+              <label class="chip"><input type="radio" name="surface" value="200 à 1 000 m²" id="s-3"><span>200–1&nbsp;000&nbsp;m²</span></label>
+              <label class="chip"><input type="radio" name="surface" value="Plus de 1 000 m²" id="s-4"><span>&gt; 1&nbsp;000&nbsp;m²</span></label>
+            </div>
+          </fieldset>
+          <div class="fields">
+            <div class="field" data-required>
+              <input type="text" id="f-name" name="name" placeholder=" " autocomplete="name" data-msg="Indiquez votre nom pour que nous sachions qui rappeler.">
+              <label for="f-name">Nom et prénom</label>
+              <p class="err" aria-live="polite"></p>
+            </div>
+            <div class="field" data-required>
+              <input type="email" id="f-email" name="email" placeholder=" " autocomplete="email" data-msg="Indiquez une adresse e-mail pour recevoir notre réponse.">
+              <label for="f-email">E-mail</label>
+              <p class="err" aria-live="polite"></p>
+            </div>
+            <div class="field field-full">
+              <input type="text" id="f-place" name="place" placeholder=" " autocomplete="address-level2">
+              <label for="f-place">Commune du terrain (facultatif)</label>
+              <p class="err"></p>
+            </div>
+            <div class="field field-full" data-required>
+              <textarea id="f-message" name="message" placeholder=" " data-msg="Décrivez votre projet en une ou deux phrases."></textarea>
+              <label for="f-message">Votre terrain et votre projet en quelques lignes</label>
+              <p class="err" aria-live="polite"></p>
+            </div>
+          </div>
+          <div class="submit-row">
+            <p>La demande se prépare ici, sur votre écran. Vous la copiez puis nous l’envoyez par e-mail.</p>
+            <button class="btn-primary magnetic" type="submit">Préparer ma demande <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </form>
+        <div class="brief-out" id="brief-out" hidden>
+          <h3 id="brief-out-title" tabindex="-1">Votre demande est prête.</h3>
+          <p>Copiez-la et envoyez-la à <strong>atelier@solstice-architectes.fr</strong>. Un architecte associé vous rappelle sous une semaine.</p>
+          <pre id="brief-text"></pre>
+          <div class="brief-actions">
+            <button class="btn-primary" type="button" id="brief-copy">Copier la demande</button>
+            <button class="btn" type="button" id="brief-edit">Modifier</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-cta">
+        <p class="h2">Dessinons un lieu <em>où il fait bon vivre.</em></p>
+        <a class="btn magnetic" href="#contact">Écrire à l’atelier&nbsp;→</a>
+      </div>
+      <div class="footer-cols">
+        <div><h3>Atelier</h3><p>18 quai des Chartrons<br>33000 Bordeaux</p></div>
+        <div><h3>Nouveaux projets</h3><p>atelier@solstice-architectes.fr</p></div>
+        <div><h3>Réseaux</h3><ul><li><a href="https://www.instagram.com/">Instagram</a></li><li><a href="https://www.linkedin.com/">LinkedIn</a></li><li><a href="https://www.pinterest.com/">Pinterest</a></li></ul></div>
+        <div><h3>Carrières</h3><p>Nous recrutons un·e architecte HMONP pour nos projets de logement.</p></div>
+      </div>
+    </div>
+    <p class="wordmark" aria-label="Solstice"><span class="wm-inner" aria-hidden="true"><span>S</span><span>o</span><span>l</span><span>s</span><span>t</span><span>i</span><span>c</span><span>e</span></span></p>
+    <div class="footer-bottom">
+      <span>© 2026 Solstice Architectes · Marque fictive, site de démonstration</span>
+      <span>44,8378° N · 0,5792° O</span>
+      <a href="#top">Retour en haut&nbsp;↑</a>
+    </div>
+  </div>
+</footer>
+
+<dialog class="case" id="case" aria-labelledby="case-title" data-lenis-prevent>
+  <div class="case-bar">
+    <p class="label" id="case-kicker">Fiche projet</p>
+    <button class="btn case-close" type="button">Fermer <span aria-hidden="true">✕</span></button>
+  </div>
+  <div class="case-cover"><canvas id="case-canvas" aria-hidden="true"></canvas></div>
+  <div class="wrap case-body">
+    <div class="case-grid">
+      <h2 class="case-title" id="case-title">Maison Tilleul</h2>
+      <p class="case-intro" id="case-intro"></p>
+      <dl class="case-facts">
+        <div><dt>Programme</dt><dd id="case-sector"></dd></div>
+        <div><dt>Surface</dt><dd id="case-surface"></dd></div>
+        <div><dt>Livraison</dt><dd id="case-year"></dd></div>
+        <div><dt>Maîtrise d’ouvrage</dt><dd id="case-client"></dd></div>
+        <div><dt>Missions</dt><dd id="case-services"></dd></div>
+      </dl>
+      <div class="case-text">
+        <div><h3>Le défi</h3><p id="case-challenge"></p></div>
+        <div><h3>Notre réponse</h3><p id="case-answer"></p></div>
+      </div>
+    </div>
+    <ul class="case-results" id="case-results"></ul>
+    <button class="case-next" type="button" id="case-next"><span class="label">Projet suivant</span><span class="case-next-name" id="case-next-name"></span></button>
+  </div>
+</dialog>
+
+<div class="cursor" aria-hidden="true"><div class="cursor-dot"></div><div class="cursor-ring"><span></span></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  'use strict';
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const G = window.gsap;
+  const ST = window.ScrollTrigger;
+  if (G && ST) G.registerPlugin(ST);
+  const safe = (name, fn) => { try { return fn(); } catch (err) { console.error('[Solstice] ' + name, err); } };
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+  const fr = (n, d = 0) => n.toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const refresh = () => { if (ST) ST.refresh(); };
+
+  /* ---------- données des projets ---------- */
+  const WORKS = [
+    { id: 'tilleul', name: 'Maison Tilleul', sector: 'Maison individuelle, Cap-Ferret', surface: '168 m²', year: '2025', client: 'Particuliers',
+      services: ['Architecture', 'Paysage', 'Intérieur'],
+      intro: 'Une maison en bois posée entre les pins, à 300 mètres de l’océan, pour une famille de cinq personnes.',
+      challenge: 'Construire sur une dune boisée sans abattre un seul pin protégé, et garder la maison fraîche l’été sans climatisation.',
+      answer: 'Une ossature bois sur pieux vissés, un bardage en pin maritime local et un débord de toiture calculé pour arrêter le soleil de juin et laisser entrer celui de décembre.',
+      results: [['18', 'kWhep/m²/an d’énergie primaire (Cep,nr)'], ['0', 'arbre abattu sur la parcelle'], ['11 mois', 'de chantier']] },
+    { id: 'tanneurs', name: 'Médiathèque des Tanneurs', sector: 'Équipement culturel, Dordogne', surface: '2 400 m²', year: '2024', client: 'Maîtrise d’ouvrage publique',
+      services: ['Architecture', 'Réhabilitation', 'Intérieur'],
+      intro: 'La transformation d’une tannerie du XIXe siècle en médiathèque ouverte sur la rivière.',
+      challenge: 'Conserver la charpente et les murs de pierre tout en apportant assez de lumière naturelle pour lire, sans éblouir.',
+      answer: 'Une toiture en sheds orientés au nord, une isolation intérieure en fibre de bois et des menuiseries fabriquées par des artisans du département.',
+      results: [['+62 %', 'de fréquentation la première année'], ['−71 %', 'de consommation de chauffage'], ['78 %', 'de la structure d’origine conservée']] },
+    { id: 'cedres', name: 'Les Cèdres', sector: '42 logements collectifs, Bordeaux', surface: '3 150 m²', year: '2025', client: 'Bailleur social',
+      services: ['Architecture', 'Biosourcé', 'Paysage'],
+      intro: '42 logements traversants en structure bois, construits sur un ancien parking de la rive droite.',
+      challenge: 'Loger 42 familles sur une parcelle étroite en offrant à chaque logement deux orientations et un extérieur généreux.',
+      answer: 'Une structure mixte en bois et béton bas carbone, des coursives plantées au nord et des loggias profondes au sud qui arrêtent le soleil d’été.',
+      results: [['42', 'logements traversants'], ['96 kg/m²', 'de matériaux biosourcés'], ['468', 'kgCO₂eq/m², Ic construction']] },
+    { id: 'cretes', name: 'Refuge des Crêtes', sector: 'Refuge de montagne, Pyrénées', surface: '210 m²', year: '2023', client: 'Maîtrise d’ouvrage publique',
+      services: ['Architecture', 'Biosourcé'],
+      intro: 'Un refuge de 38 couchages à 2 180 mètres d’altitude, construit en éléments préfabriqués héliportés.',
+      challenge: 'Construire en deux saisons d’été, résister à plus d’une tonne de neige par mètre carré et fonctionner sans raccordement au réseau.',
+      answer: 'Des caissons bois préfabriqués dans la vallée et assemblés en 14 jours, un bardage en mélèze non traité et une production solaire couplée à des batteries.',
+      results: [['2 180 m', 'd’altitude'], ['14 jours', 'd’assemblage sur site'], ['100 %', 'd’énergie solaire en saison']] },
+    { id: 'saintroch', name: 'Halle Saint-Roch', sector: 'Marché couvert, Bayonne', surface: '1 900 m²', year: '2024', client: 'Maîtrise d’ouvrage publique',
+      services: ['Réhabilitation', 'Architecture', 'Intérieur'],
+      intro: 'La réhabilitation d’une halle industrielle de 1931 en marché couvert et en lieu d’événements.',
+      challenge: 'Rendre la halle accueillante en toute saison sans effacer son caractère industriel ni démolir ce qui pouvait servir.',
+      answer: 'La charpente métallique conservée et repeinte, des verrières dégagées et des étals fabriqués avec les bois de l’ancienne toiture.',
+      results: [['86 %', 'des matériaux conservés ou réemployés'], ['28', 'commerçants installés'], ['5 400', 'visiteurs chaque samedi']] }
+  ];
+
+  /* ---------- défilement fluide ---------- */
+  let lenis = null;
+  safe('lenis', () => {
+    if (reduce || !window.Lenis) return;
+    lenis = new window.Lenis({ lerp: 0.095, smoothWheel: true });
+    if (G) {
+      if (ST) lenis.on('scroll', ST.update);
+      G.ticker.add((t) => lenis.raf(t * 1000));
+      G.ticker.lagSmoothing(0);
+    } else {
+      const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+    }
+  });
+  const ease4 = (t) => 1 - Math.pow(1 - t, 4);
+  function scrollToY(y) {
+    if (lenis) lenis.scrollTo(y, { duration: 1.5, easing: ease4 });
+    else window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  function scrollToEl(el) {
+    if (lenis) lenis.scrollTo(el, { duration: 1.6, easing: ease4 });
+    else el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  }
+
+  /* ---------- menu mobile ---------- */
+  const menu = $('#menu');
+  const menuBtn = $('.menu-btn');
+  function setMenu(open) {
+    if (!menu || !menuBtn) return;
+    menu.classList.toggle('is-open', open);
+    menu.inert = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    $('span', menuBtn).textContent = open ? 'Fermer' : 'Menu';
+    if (lenis) { if (open) lenis.stop(); else lenis.start(); }
+  }
+  safe('menu', () => {
+    menuBtn.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); } });
+  });
+
+  /* ---------- ancres ---------- */
+  safe('anchors', () => {
+    $$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length < 2) return;
+      const target = document.getElementById(id.slice(1));
+      if (!target) return;
+      e.preventDefault();
+      const wasOpen = menu && menu.classList.contains('is-open');
+      if (wasOpen) setMenu(false);
+      setTimeout(() => (id === '#top' ? scrollToY(0) : scrollToEl(target)), wasOpen ? 350 : 0);
+    }));
+  });
+
+  /* ---------- horloge de Bordeaux ---------- */
+  safe('clock', () => {
+    const fmt = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const clocks = $$('[data-clock]');
+    const tick = () => { const t = fmt.format(new Date()); clocks.forEach((c) => { c.textContent = t; }); };
+    tick();
+    setInterval(tick, 1000);
+  });
+
+  /* ---------- position du soleil à Bordeaux, le 21 juin ---------- */
+  const D2R = Math.PI / 180;
+  const LAT = 44.84 * D2R;
+  const DEC = 23.44 * D2R;
+  function sunAt(minutes) {
+    const solar = minutes / 60 - 2 - 4 / 60; // heure légale d'été − 2 h 04 ≈ heure solaire vraie
+    const H = (solar - 12) * 15 * D2R;
+    const alt = Math.asin(Math.sin(LAT) * Math.sin(DEC) + Math.cos(LAT) * Math.cos(DEC) * Math.cos(H));
+    const az = Math.atan2(Math.sin(H), Math.cos(H) * Math.sin(LAT) - Math.tan(DEC) * Math.cos(LAT)) + Math.PI;
+    return { alt, az };
+  }
+
+  /* ---------- héros WebGL : étude d'ensoleillement ---------- */
+  safe('hero-gl', () => {
+    const hero = $('.hero');
+    const canvas = $('.hero-gl');
+    const T = window.THREE;
+    const fail = () => root.classList.add('no-gl');
+    if (!T || !canvas) return fail();
+    let renderer;
+    try {
+      renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    } catch (e) { return fail(); }
+    if (!renderer.getContext()) return fail();
+    const small = matchMedia('(max-width: 700px)').matches;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2));
+    renderer.setClearColor(0x000000, 0);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = T.PCFSoftShadowMap;
+
+    const scene = new T.Scene();
+    const camera = new T.OrthographicCamera(-5, 5, 5, -5, 0.1, 200);
+    const target = new T.Vector3(0, 1.3, 0);
+
+    const massMat = new T.MeshStandardMaterial({ color: 0xF4F4F0, roughness: 0.92, metalness: 0 });
+    const woodMat = new T.MeshStandardMaterial({ color: 0xCFAE84, roughness: 0.85, metalness: 0 });
+    const glassMat = new T.MeshStandardMaterial({ color: 0x2A3035, roughness: 0.3, metalness: 0.1, emissive: new T.Color(0xFFB547), emissiveIntensity: 0 });
+    const treeMat = new T.MeshStandardMaterial({ color: 0xE6E6E0, roughness: 1, flatShading: true });
+    const edgeMat = new T.LineBasicMaterial({ color: 0x151617, transparent: true, opacity: 0.3 });
+
+    const model = new T.Group();
+    scene.add(model);
+    function add(geo, mat, x, y, z, edges) {
+      const mesh = new T.Mesh(geo, mat);
+      mesh.position.set(x, y, z);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      model.add(mesh);
+      if (edges) { const e = new T.LineSegments(new T.EdgesGeometry(geo), edgeMat); e.position.copy(mesh.position); model.add(e); }
+      return mesh;
+    }
+    const box = (w, h, d, x, y, z, mat = massMat, edges = true) => add(new T.BoxGeometry(w, h, d), mat, x, y, z, edges);
+
+    // maquette d'étude : socle, rez-de-chaussée, étage en porte-à-faux, toiture débordante
+    box(7.6, 0.16, 5.6, 0.2, 0.08, 0.4);
+    box(4.4, 1.5, 3.2, -1.0, 0.91, -0.4);
+    box(4.3, 1.35, 2.6, 0.75, 2.335, -0.7);
+    box(4.7, 0.08, 3.0, 0.75, 3.05, -0.6);
+    // vitrages
+    box(3.4, 1.22, 0.05, -1.0, 0.85, 1.21, glassMat, false);
+    box(3.8, 0.55, 0.05, 0.75, 2.4, 0.61, glassMat, false);
+    box(0.05, 0.9, 1.7, 2.91, 2.3, -0.7, glassMat, false);
+    // pergola en bois : ses lames dessinent des ombres rayées sur la terrasse
+    const pz0 = 1.25, pz1 = 2.85, px0 = -2.9, px1 = 0.9;
+    [px0, (px0 + px1) / 2, px1].forEach((x) => box(0.09, 1.5, 0.09, x, 0.91, pz1, woodMat, false));
+    box(px1 - px0 + 0.12, 0.1, 0.1, (px0 + px1) / 2, 1.63, pz1, woodMat, false);
+    box(px1 - px0 + 0.12, 0.1, 0.1, (px0 + px1) / 2, 1.63, pz0, woodMat, false);
+    for (let x = px0 + 0.08; x <= px1 - 0.05; x += 0.21) box(0.05, 0.12, pz1 - pz0, x, 1.74, (pz0 + pz1) / 2, woodMat, false);
+    // arbres
+    function tree(x, z, s) {
+      add(new T.CylinderGeometry(0.045 * s, 0.07 * s, 1.3 * s, 8), massMat, x, 0.65 * s, z, false);
+      add(new T.IcosahedronGeometry(0.78 * s, 1), treeMat, x, 1.75 * s, z, false);
+    }
+    tree(4.5, 2.6, 1);
+    tree(-4.7, -1.9, 1.25);
+    tree(3.9, -2.9, 0.8);
+
+    // sol : ne reçoit que les ombres, le fond de la page reste visible
+    const shadowMat = new T.ShadowMaterial({ color: 0x1B2230, opacity: 0.2 });
+    const ground = new T.Mesh(new T.PlaneGeometry(140, 140), shadowMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    // héliodon : cercle au sol, repère nord et course du soleil
+    const R = 6.4;
+    const lineMat = new T.LineDashedMaterial({ color: 0x151617, dashSize: 0.16, gapSize: 0.12, transparent: true, opacity: 0.4 });
+    const dirOf = (s) => new T.Vector3(Math.cos(s.alt) * Math.sin(s.az), Math.sin(s.alt), -Math.cos(s.alt) * Math.cos(s.az));
+    const pathPts = [];
+    for (let m = 240; m <= 1440; m += 3) { const s = sunAt(m); if (s.alt > -0.01) pathPts.push(dirOf(s).multiplyScalar(R)); }
+    const path = new T.Line(new T.BufferGeometry().setFromPoints(pathPts), lineMat);
+    path.computeLineDistances();
+    scene.add(path);
+    const ringPts = [];
+    for (let i = 0; i <= 160; i++) { const a = (i / 160) * Math.PI * 2; ringPts.push(new T.Vector3(Math.cos(a) * R, 0.01, Math.sin(a) * R)); }
+    const ring = new T.Line(new T.BufferGeometry().setFromPoints(ringPts), lineMat);
+    ring.computeLineDistances();
+    scene.add(ring);
+    const north = new T.Mesh(new T.BufferGeometry().setFromPoints([new T.Vector3(0, 0.02, -R - 0.75), new T.Vector3(-0.22, 0.02, -R - 0.15), new T.Vector3(0.22, 0.02, -R - 0.15)]), new T.MeshBasicMaterial({ color: 0x151617, side: T.DoubleSide }));
+    scene.add(north);
+
+    const sunMat = new T.MeshBasicMaterial({ color: 0xF2B200 });
+    const sunMesh = new T.Mesh(new T.SphereGeometry(0.24, 32, 32), sunMat);
+    const halo = new T.Mesh(new T.SphereGeometry(0.5, 32, 32), new T.MeshBasicMaterial({ color: 0xF2B200, transparent: true, opacity: 0.18, depthWrite: false }));
+    scene.add(sunMesh, halo);
+    const rayGeo = new T.BufferGeometry().setFromPoints([new T.Vector3(), target.clone()]);
+    const rayMat = new T.LineDashedMaterial({ color: 0xF2B200, dashSize: 0.12, gapSize: 0.1 });
+    const ray = new T.Line(rayGeo, rayMat);
+    scene.add(ray);
+
+    const hemi = new T.HemisphereLight(0xFFFFFF, 0xCFCBC2, 0.6);
+    scene.add(hemi);
+    const sunLight = new T.DirectionalLight(0xFFF3E0, 1.1);
+    sunLight.castShadow = true;
+    const ms = small ? 1024 : 2048;
+    sunLight.shadow.mapSize.set(ms, ms);
+    const sc = sunLight.shadow.camera;
+    sc.left = -13; sc.right = 13; sc.top = 13; sc.bottom = -13; sc.near = 1; sc.far = 90;
+    sunLight.shadow.bias = -0.0005;
+    sunLight.shadow.normalBias = 0.03;
+    scene.add(sunLight, sunLight.target);
+
+    let night = false;
+    let baseShadow = 0.2;
+    const lum = (c) => 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
+    function syncColors() {
+      const s = getComputedStyle(root);
+      const paper = new T.Color(s.getPropertyValue('--paper').trim() || '#EBEBE7');
+      const ink = new T.Color(s.getPropertyValue('--ink').trim() || '#151617');
+      const sun = s.getPropertyValue('--sun').trim() || '#F2B200';
+      night = lum(paper) < 0.3;
+      massMat.color.set(night ? 0x2B2D31 : 0xF4F4F0);
+      treeMat.color.set(night ? 0x25282B : 0xE6E6E0);
+      woodMat.color.set(night ? 0x8C7356 : 0xCFAE84);
+      edgeMat.color.copy(ink);
+      edgeMat.opacity = night ? 0.2 : 0.3;
+      lineMat.color.copy(ink);
+      lineMat.opacity = night ? 0.3 : 0.4;
+      north.material.color.copy(ink);
+      shadowMat.color.set(night ? 0x000000 : 0x1B2230);
+      baseShadow = night ? 0.5 : 0.26;
+      hemi.color.set(night ? 0x8B97B0 : 0xFFFFFF);
+      hemi.groundColor.set(night ? 0x16181C : 0xCFCBC2);
+      sunMat.color.set(sun);
+      halo.material.color.set(sun);
+      rayMat.color.set(sun);
+    }
+    syncColors();
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncColors);
+    new MutationObserver(syncColors).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+    function layout() {
+      const w = hero.clientWidth;
+      const h = hero.clientHeight;
+      renderer.setSize(w, h, false);
+      const aspect = w / h;
+      let W, H, offX, offY;
+      if (aspect > 1.1) { H = 14.5; W = H * aspect; offX = W * 0.19; offY = 0.4; }
+      else {
+        // en portrait, la maquette occupe l'espace réservé entre le surtitre et le titre
+        const hr = hero.getBoundingClientRect();
+        const top = $('.eyebrow').getBoundingClientRect().bottom - hr.top;
+        const bottom = $('.hero-title').getBoundingClientRect().top - hr.top;
+        const gap = Math.max(160, bottom - top);
+        H = Math.max(13 / aspect, (8.5 * h) / gap);
+        W = H * aspect;
+        offX = 0;
+        offY = H * (0.5 - (top + gap * 0.52) / h);
+      }
+      camera.left = -W / 2 - offX;
+      camera.right = W / 2 - offX;
+      camera.top = H / 2 - offY;
+      camera.bottom = -H / 2 - offY;
+      camera.updateProjectionMatrix();
+    }
+    layout();
+    if (window.ResizeObserver) new ResizeObserver(layout).observe(hero);
+    else addEventListener('resize', layout);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+
+    // commandes de l'étude
+    const slider = $('#sun-time');
+    const playBtn = $('#sun-play');
+    const clockEl = $('#sun-clock');
+    const azEl = $('#sun-az');
+    const altEl = $('#sun-alt');
+    const compass = $('#compass-sun');
+    const MIN = 330, MAX = 1350;
+    let minutes = reduce ? 990 : 540;
+    let playing = !reduce;
+    function setPlaying(p) {
+      playing = p;
+      playBtn.setAttribute('aria-pressed', String(p));
+      playBtn.classList.toggle('is-paused', !p);
+      $('.sr-only', playBtn).textContent = p ? 'Mettre en pause la course du soleil' : 'Lancer la course du soleil';
+    }
+    setPlaying(playing);
+    slider.addEventListener('input', () => { minutes = Number(slider.value); setPlaying(false); });
+    playBtn.addEventListener('click', () => setPlaying(!playing));
+
+    const ptr = { x: 0, y: 0, tx: 0, ty: 0 };
+    hero.addEventListener('pointermove', (e) => {
+      if (e.target.closest('.hud')) return;
+      const r = hero.getBoundingClientRect();
+      ptr.tx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      ptr.ty = -(((e.clientY - r.top) / r.height) * 2 - 1);
+    }, { passive: true });
+
+    let visible = true;
+    if (window.IntersectionObserver) new IntersectionObserver(([en]) => { visible = en.isIntersecting; }).observe(hero);
+
+    const warm = new T.Color(0xFFB067);
+    const white = new T.Color(0xFFF6EA);
+    const dir = new T.Vector3();
+    let shownMinute = -1;
+    let last = performance.now();
+    function frame(now) {
+      requestAnimationFrame(frame);
+      if (!visible || document.hidden) { last = now; return; }
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      if (playing) {
+        minutes += dt * 30;
+        if (minutes > MAX) minutes = MIN;
+        slider.value = String(Math.round(minutes));
+      }
+      const s = sunAt(minutes);
+      dir.set(Math.cos(s.alt) * Math.sin(s.az), Math.sin(s.alt), -Math.cos(s.alt) * Math.cos(s.az));
+      const sinAlt = Math.sin(s.alt);
+      const k = smooth(0.0, 0.16, sinAlt);
+
+      sunLight.position.copy(dir).multiplyScalar(40);
+      sunLight.intensity = 1.15 * k;
+      sunLight.castShadow = k > 0.01;
+      sunLight.color.copy(warm).lerp(white, smooth(0.05, 0.55, sinAlt));
+      shadowMat.opacity = baseShadow * k;
+      hemi.intensity = (night ? 0.3 : 0.5) + (night ? 0.15 : 0.25) * k;
+      glassMat.emissiveIntensity = (1 - smooth(-0.04, 0.2, sinAlt)) * (night ? 1.6 : 1.0) + (night ? 0.35 : 0);
+
+      const above = sinAlt > -0.03;
+      sunMesh.visible = halo.visible = ray.visible = above;
+      sunMesh.position.copy(dir).multiplyScalar(R);
+      halo.position.copy(sunMesh.position);
+      const pos = rayGeo.attributes.position;
+      pos.setXYZ(0, sunMesh.position.x, sunMesh.position.y, sunMesh.position.z);
+      pos.needsUpdate = true;
+      ray.computeLineDistances();
+
+      ptr.x += (ptr.tx - ptr.x) * 0.05;
+      ptr.y += (ptr.ty - ptr.y) * 0.05;
+      const sp = clamp(window.scrollY / Math.max(1, hero.offsetHeight));
+      const caz = (145 + ptr.x * 9 + sp * 25) * D2R;
+      const cel = (31 + ptr.y * 4 + sp * 10) * D2R;
+      camera.position.set(target.x + 40 * Math.cos(cel) * Math.sin(caz), target.y + 40 * Math.sin(cel), target.z - 40 * Math.cos(cel) * Math.cos(caz));
+      camera.lookAt(target);
+
+      const mm = Math.floor(minutes);
+      if (mm !== shownMinute) {
+        shownMinute = mm;
+        const t = String(Math.floor(mm / 60)).padStart(2, '0') + ':' + String(mm % 60).padStart(2, '0');
+        const azd = (s.az / D2R + 360) % 360;
+        const altd = s.alt / D2R;
+        clockEl.textContent = t;
+        azEl.textContent = Math.round(azd) + '°';
+        altEl.textContent = altd > 0 ? Math.round(altd) + '°' : 'nuit';
+        compass.setAttribute('transform', 'rotate(' + azd.toFixed(1) + ' 22 22)');
+        slider.setAttribute('aria-valuetext', t + (altd > 0 ? ', soleil à ' + Math.round(altd) + ' degrés' : ', soleil couché'));
+      }
+      renderer.render(scene, camera);
+    }
+    requestAnimationFrame(frame);
+  });
+
+  /* ---------- planches dessinées des projets ---------- */
+  const INK = '#1B1C1E';
+  const SUN = '#F2B200';
+  function mulberry(a) { return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function text(c, str, x, y, size, color, align) {
+    c.font = '500 ' + Math.round(size) + 'px "IBM Plex Mono", ui-monospace, monospace';
+    c.fillStyle = color; c.textAlign = align || 'left'; c.textBaseline = 'alphabetic';
+    c.fillText(str, x, y);
+  }
+  function person(c, x, gy, hh, color) {
+    c.fillStyle = color || INK; c.strokeStyle = color || INK;
+    c.beginPath(); c.arc(x, gy - hh * 0.9, hh * 0.08, 0, Math.PI * 2); c.fill();
+    c.lineWidth = Math.max(1.2, hh * 0.07); c.lineCap = 'round';
+    c.beginPath();
+    c.moveTo(x, gy - hh * 0.8); c.lineTo(x, gy - hh * 0.42); c.lineTo(x - hh * 0.1, gy);
+    c.moveTo(x, gy - hh * 0.42); c.lineTo(x + hh * 0.08, gy);
+    c.moveTo(x, gy - hh * 0.7); c.lineTo(x - hh * 0.12, gy - hh * 0.46);
+    c.moveTo(x, gy - hh * 0.7); c.lineTo(x + hh * 0.1, gy - hh * 0.48);
+    c.stroke(); c.lineCap = 'butt';
+  }
+  function earth(c, w, h, gy, color) {
+    c.save(); c.beginPath(); c.rect(0, gy, w, h - gy); c.clip();
+    c.strokeStyle = color; c.lineWidth = 1;
+    for (let x = -h; x < w + h; x += 8) { c.beginPath(); c.moveTo(x, h); c.lineTo(x + (h - gy), gy); c.stroke(); }
+    c.restore();
+  }
+  const COVERS = {
+    tilleul(c, w, h) {
+      const m = Math.min(w, h);
+      const g = c.createLinearGradient(0, 0, 0, h);
+      g.addColorStop(0, '#D2DBDC'); g.addColorStop(1, '#E9E6DF');
+      c.fillStyle = g; c.fillRect(0, 0, w, h);
+      const gy = h * 0.78;
+      c.fillStyle = '#DDD7CB'; c.fillRect(0, gy, w, h - gy);
+      earth(c, w, h, gy, 'rgba(27,28,30,.15)');
+      // pins parasols au nord
+      const pine = (x, s) => {
+        c.strokeStyle = INK; c.lineWidth = Math.max(1.5, m * 0.008);
+        c.beginPath(); c.moveTo(x, gy); c.quadraticCurveTo(x - m * 0.03 * s, gy - m * 0.25 * s, x + m * 0.02 * s, gy - m * 0.42 * s); c.stroke();
+        c.fillStyle = 'rgba(36,50,42,.9)';
+        const cx = x + m * 0.02 * s, cy = gy - m * 0.45 * s;
+        [[-0.1, 0.02, 0.11], [0.04, -0.02, 0.12], [0.15, 0.03, 0.08], [-0.02, 0.05, 0.09]].forEach(([dx, dy, r]) => {
+          c.beginPath(); c.ellipse(cx + dx * m * s, cy + dy * m * s, r * m * s, r * m * s * 0.42, 0, 0, Math.PI * 2); c.fill();
+        });
+      };
+      pine(w * 0.9, 1); pine(w * 0.79, 0.72);
+      // maison en coupe, toiture monopente avec débord au sud (à gauche)
+      const x0 = w * 0.36, x1 = w * 0.72, wallH = h * 0.24, top = gy - wallH;
+      const over = (x1 - x0) * 0.24;
+      const tipX = x0 - over, tipY = top - h * 0.04;
+      const x1e = x1 + m * 0.02;
+      const yr = (x) => tipY + ((x - tipX) / (x1e - tipX)) * (top - tipY);
+      c.fillStyle = '#F4F2ED';
+      c.beginPath(); c.moveTo(x0, yr(x0)); c.lineTo(x1, yr(x1)); c.lineTo(x1, gy); c.lineTo(x0, gy); c.closePath(); c.fill();
+      const sa = 68 * Math.PI / 180, wa = 22 * Math.PI / 180;
+      // tache de soleil d'hiver sur le plancher
+      const winterX = Math.min(tipX + (gy - tipY) / Math.tan(wa), x1 - 4);
+      c.fillStyle = 'rgba(242,178,0,.34)';
+      c.beginPath(); c.moveTo(x0, tipY + (x0 - tipX) * Math.tan(wa)); c.lineTo(winterX, gy); c.lineTo(x0, gy); c.closePath(); c.fill();
+      // table et personnage pour l'échelle
+      c.strokeStyle = INK; c.lineWidth = 1.3;
+      const tx = x0 + (x1 - x0) * 0.62, ty = gy - h * 0.055;
+      c.beginPath(); c.moveTo(tx - m * 0.06, ty); c.lineTo(tx + m * 0.06, ty); c.moveTo(tx - m * 0.05, ty); c.lineTo(tx - m * 0.05, gy); c.moveTo(tx + m * 0.05, ty); c.lineTo(tx + m * 0.05, gy); c.stroke();
+      person(c, x0 + (x1 - x0) * 0.3, gy, h * 0.13);
+      // dalle, mur nord, vitrage sud, toiture
+      c.fillStyle = INK;
+      c.fillRect(x0 - 2, gy - 2, x1 - x0 + 4, Math.max(4, m * 0.012));
+      c.fillRect(x1 - m * 0.024, yr(x1), m * 0.024, gy - yr(x1));
+      c.strokeStyle = '#5E8CA2'; c.lineWidth = 2;
+      c.beginPath(); c.moveTo(x0 + 1, yr(x0)); c.lineTo(x0 + 1, gy); c.moveTo(x0 + 5, yr(x0)); c.lineTo(x0 + 5, gy); c.stroke();
+      const rt = h * 0.03;
+      c.fillStyle = INK;
+      c.beginPath(); c.moveTo(tipX, tipY - rt); c.lineTo(x1e, top - rt); c.lineTo(x1e, top); c.lineTo(tipX, tipY); c.closePath(); c.fill();
+      // rayons du 21 juin et du 21 décembre passant par l'arête du débord
+      c.setLineDash([6, 5]); c.lineWidth = 1.4; c.strokeStyle = 'rgba(150,100,0,.95)';
+      [sa, wa].forEach((a) => {
+        const len = Math.hypot(w, h);
+        c.beginPath(); c.moveTo(tipX - Math.cos(a) * len, tipY - Math.sin(a) * len); c.lineTo(tipX + (gy - tipY) / Math.tan(a), gy); c.stroke();
+      });
+      c.setLineDash([]);
+      // arcs d'angle
+      c.strokeStyle = 'rgba(27,28,30,.6)'; c.lineWidth = 1;
+      c.beginPath(); c.arc(tipX, tipY, m * 0.07, Math.PI, Math.PI + wa); c.stroke();
+      c.beginPath(); c.arc(tipX, tipY, m * 0.11, Math.PI, Math.PI + sa); c.stroke();
+      // soleils
+      const ds = (tipY - m * 0.11) / Math.sin(sa);
+      const sx = tipX - Math.cos(sa) * ds, sy = tipY - Math.sin(sa) * ds;
+      c.fillStyle = SUN; c.beginPath(); c.arc(sx, sy, m * 0.045, 0, Math.PI * 2); c.fill();
+      const dw = (tipX - m * 0.09) / Math.cos(wa);
+      const wx = tipX - Math.cos(wa) * dw, wy = tipY - Math.sin(wa) * dw;
+      c.strokeStyle = 'rgba(150,100,0,.95)'; c.lineWidth = 2; c.beginPath(); c.arc(wx, wy, m * 0.03, 0, Math.PI * 2); c.stroke();
+      const fs = m * 0.03;
+      text(c, '21 JUIN · 68°', sx + m * 0.06, sy + fs * 0.35, fs, INK);
+      text(c, '21 DÉC. · 22°', wx - m * 0.01, wy - m * 0.05, fs, INK);
+      text(c, 'COUPE SOLAIRE · 1:100', m * 0.05, h - m * 0.05, fs, 'rgba(27,28,30,.75)');
+    },
+    tanneurs(c, w, h) {
+      const m = Math.min(w, h);
+      c.fillStyle = '#E6E0D3'; c.fillRect(0, 0, w, h);
+      const gy = h * 0.8, x0 = w * 0.09, x1 = w * 0.91, wallTop = h * 0.44, n = 5, tw = (x1 - x0) / n, th = h * 0.15;
+      earth(c, w, h, gy, 'rgba(27,28,30,.14)');
+      c.fillStyle = '#F3EFE7';
+      c.beginPath(); c.moveTo(x0, gy); c.lineTo(x0, wallTop);
+      for (let i = 0; i < n; i++) { const xi = x0 + i * tw; c.lineTo(xi + tw, wallTop - th); c.lineTo(xi + tw, wallTop); }
+      c.lineTo(x1, gy); c.closePath(); c.fill();
+      // lumière du nord entrant par les sheds
+      const a = 38 * Math.PI / 180;
+      for (let i = 0; i < n; i++) {
+        const gx = x0 + (i + 1) * tw;
+        for (let k = 0; k < 5; k++) {
+          const sy = wallTop - th + ((k + 0.5) * th) / 5;
+          const len = Math.min((gy - sy) / Math.sin(a), (gx - x0) / Math.cos(a));
+          const ex = gx - Math.cos(a) * len, ey = sy + Math.sin(a) * len;
+          const grd = c.createLinearGradient(gx, sy, ex, ey);
+          grd.addColorStop(0, 'rgba(242,178,0,.8)'); grd.addColorStop(1, 'rgba(242,178,0,0)');
+          c.strokeStyle = grd; c.lineWidth = 1.3;
+          c.beginPath(); c.moveTo(gx, sy); c.lineTo(ex, ey); c.stroke();
+          c.strokeStyle = 'rgba(242,178,0,.55)';
+          c.beginPath(); c.moveTo(gx + Math.cos(a) * h * 0.12, sy - Math.sin(a) * h * 0.12); c.lineTo(gx, sy); c.stroke();
+        }
+      }
+      // mezzanine, rayonnages, lecteurs
+      const my = wallTop + (gy - wallTop) * 0.48, mw = (x1 - x0) * 0.42;
+      c.fillStyle = INK; c.fillRect(x0, my, mw, Math.max(3, m * 0.012));
+      c.strokeStyle = INK; c.lineWidth = 1;
+      c.beginPath(); c.moveTo(x0 + mw, my); c.lineTo(x0 + mw, my - h * 0.05); c.lineTo(x0 + mw - tw * 0.6, my - h * 0.05); c.stroke();
+      const shelf = (x, base, sw, sh) => {
+        c.strokeStyle = INK; c.lineWidth = 1; c.strokeRect(x, base - sh, sw, sh);
+        for (let r = 1; r < 3; r++) { c.beginPath(); c.moveTo(x, base - (sh * r) / 3); c.lineTo(x + sw, base - (sh * r) / 3); c.stroke(); }
+        c.strokeStyle = 'rgba(27,28,30,.45)';
+        for (let bx = x + 3; bx < x + sw - 2; bx += 3) for (let r = 0; r < 3; r++) { c.beginPath(); c.moveTo(bx, base - (sh * r) / 3); c.lineTo(bx, base - (sh * r) / 3 - sh * 0.22); c.stroke(); }
+      };
+      shelf(x0 + tw * 0.15, my, tw * 0.6, h * 0.08);
+      shelf(x0 + tw * 0.15, gy, tw * 0.55, h * 0.1);
+      shelf(x0 + tw * 2.3, gy, tw * 0.5, h * 0.1);
+      shelf(x0 + tw * 3.6, gy, tw * 0.5, h * 0.1);
+      person(c, x0 + tw * 1.4, gy, h * 0.12);
+      person(c, x0 + tw * 3.15, gy, h * 0.12);
+      person(c, x0 + tw * 1.05, my, h * 0.11);
+      // toiture en sheds, vitrages au nord, entraits
+      c.lineJoin = 'miter'; c.strokeStyle = INK; c.lineWidth = Math.max(2, m * 0.014);
+      for (let i = 0; i < n; i++) { const xi = x0 + i * tw; c.beginPath(); c.moveTo(xi, wallTop); c.lineTo(xi + tw, wallTop - th); c.stroke(); }
+      c.strokeStyle = '#5E8CA2'; c.lineWidth = 2.4;
+      for (let i = 0; i < n; i++) { const gx = x0 + (i + 1) * tw; c.beginPath(); c.moveTo(gx, wallTop - th); c.lineTo(gx, wallTop); c.stroke(); }
+      c.strokeStyle = INK; c.lineWidth = Math.max(1.5, m * 0.007);
+      c.beginPath(); c.moveTo(x0, wallTop); c.lineTo(x1, wallTop); c.stroke();
+      // murs de pierre et plancher
+      const ww = m * 0.04;
+      c.fillStyle = INK;
+      c.fillRect(x0 - ww, wallTop - m * 0.01, ww, gy - wallTop + m * 0.01);
+      c.fillRect(x1, wallTop, ww, gy - wallTop);
+      c.fillRect(x0 - ww, gy, x1 - x0 + ww * 2, Math.max(4, m * 0.016));
+      const fs = m * 0.03;
+      text(c, 'NORD →', w - m * 0.05, h - m * 0.05, fs, 'rgba(27,28,30,.75)', 'right');
+      text(c, 'COUPE LONGITUDINALE · SHEDS AU NORD', m * 0.05, h - m * 0.05, fs, 'rgba(27,28,30,.75)');
+    },
+    cedres(c, w, h) {
+      const m = Math.min(w, h);
+      const rnd = mulberry(42);
+      c.fillStyle = '#D6DCD3'; c.fillRect(0, 0, w, h);
+      const x0 = w * 0.1, x1 = w * 0.9, top = h * 0.12, gy = h * 0.86, floors = 5, bays = 7;
+      const fh = (gy - top) / floors, bw = (x1 - x0) / bays;
+      c.fillStyle = '#EEEBE4'; c.fillRect(x0, top, x1 - x0, gy - top);
+      for (let f = 0; f < floors; f++) {
+        for (let b = 0; b < bays; b++) {
+          const x = x0 + b * bw, y = top + f * fh;
+          if (b % 3 === 1) {
+            c.fillStyle = '#C9A57A'; c.fillRect(x, y, bw, fh);
+            c.strokeStyle = 'rgba(70,45,20,.25)'; c.lineWidth = 1;
+            for (let lx = x + 3; lx < x + bw; lx += 4) { c.beginPath(); c.moveTo(lx, y); c.lineTo(lx, y + fh); c.stroke(); }
+          }
+          const lit = rnd() < 0.14;
+          c.fillStyle = lit ? SUN : '#2B3135';
+          c.fillRect(x + bw * 0.18, y + fh * 0.16, bw * 0.64, fh * 0.72);
+          c.strokeStyle = 'rgba(255,255,255,.22)'; c.lineWidth = 1;
+          c.beginPath(); c.moveTo(x + bw * 0.5, y + fh * 0.16); c.lineTo(x + bw * 0.5, y + fh * 0.88); c.stroke();
+          if (f < floors - 1 && rnd() < 0.6) {
+            const by = y + fh - 1;
+            const sg = c.createLinearGradient(0, by, 0, by + fh * 0.4);
+            sg.addColorStop(0, 'rgba(20,22,24,.28)'); sg.addColorStop(1, 'rgba(20,22,24,0)');
+            c.fillStyle = sg; c.fillRect(x - bw * 0.04, by + 3, bw * 1.08, fh * 0.4);
+            c.strokeStyle = 'rgba(27,28,30,.6)'; c.lineWidth = 1;
+            for (let rx = x - bw * 0.04; rx <= x + bw * 1.04; rx += 4) { c.beginPath(); c.moveTo(rx, by); c.lineTo(rx, by - fh * 0.3); c.stroke(); }
+            c.beginPath(); c.moveTo(x - bw * 0.06, by - fh * 0.3); c.lineTo(x + bw * 1.06, by - fh * 0.3); c.stroke();
+            c.fillStyle = INK; c.fillRect(x - bw * 0.06, by - 2, bw * 1.12, Math.max(4, m * 0.012));
+          }
+        }
+      }
+      c.fillStyle = INK;
+      c.fillRect(x0 - m * 0.01, top - m * 0.02, x1 - x0 + m * 0.02, m * 0.02);
+      c.fillRect(0, gy, w, Math.max(3, m * 0.008));
+      // arbres d'alignement
+      [0.06, 0.32, 0.6, 0.93].forEach((u, i) => {
+        const tx = w * u, r = m * (0.07 + (i % 2) * 0.02);
+        c.strokeStyle = INK; c.lineWidth = 1.5; c.beginPath(); c.moveTo(tx, gy); c.lineTo(tx, gy - r * 1.6); c.stroke();
+        c.fillStyle = 'rgba(70,88,66,.78)'; c.beginPath(); c.arc(tx, gy - r * 2.1, r, 0, Math.PI * 2); c.fill();
+      });
+      person(c, w * 0.45, gy, h * 0.07);
+      person(c, w * 0.49, gy, h * 0.065);
+      const fs = m * 0.03;
+      text(c, 'FAÇADE SUD · R+4 · 42 LOGEMENTS', m * 0.05, h - m * 0.035, fs, 'rgba(27,28,30,.75)');
+    },
+    cretes(c, w, h) {
+      const m = Math.min(w, h);
+      c.fillStyle = '#17191B'; c.fillRect(0, 0, w, h);
+      const cx = w * 0.6, cy = h * 0.42;
+      const contour = (k, t) => {
+        const r0 = (k + 1) * m * 0.042;
+        const r = r0 * (1 + 0.16 * Math.sin(3 * t + k * 0.25) + 0.07 * Math.sin(7 * t - k * 0.4) + 0.03 * Math.cos(11 * t + k));
+        return [cx + r * 1.4 * Math.cos(t), cy + r * Math.sin(t)];
+      };
+      const fs = m * 0.028;
+      for (let k = 0; k < 28; k++) {
+        const master = k % 5 === 0;
+        c.strokeStyle = master ? 'rgba(232,228,218,.72)' : 'rgba(232,228,218,.24)';
+        c.lineWidth = master ? 1.5 : 1;
+        c.beginPath();
+        for (let i = 0; i <= 200; i++) { const [x, y] = contour(k, (i / 200) * Math.PI * 2); if (i === 0) c.moveTo(x, y); else c.lineTo(x, y); }
+        c.stroke();
+        if (master && k > 0) {
+          const [lx, ly] = contour(k, -0.55);
+          const t = String(2300 - k * 10).replace(/(\d)(\d{3})$/, '$1 $2');
+          c.font = '500 ' + Math.round(fs) + 'px "IBM Plex Mono", monospace';
+          const tw = c.measureText(t).width;
+          c.fillStyle = '#17191B'; c.fillRect(lx - tw / 2 - 4, ly - fs * 0.8, tw + 8, fs * 1.2);
+          text(c, t, lx, ly + fs * 0.25, fs, 'rgba(232,228,218,.85)', 'center');
+        }
+      }
+      // sentier et refuge à 2 180 m
+      const [rx, ry] = contour(12, 2.35);
+      c.setLineDash([4, 5]); c.strokeStyle = 'rgba(242,178,0,.7)'; c.lineWidth = 1.4;
+      c.beginPath(); c.moveTo(w * 0.02, h * 0.98);
+      c.bezierCurveTo(w * 0.2, h * 0.8, rx - w * 0.2, ry + h * 0.25, rx, ry); c.stroke(); c.setLineDash([]);
+      c.save(); c.translate(rx, ry); c.rotate(-0.4);
+      c.fillStyle = SUN; c.fillRect(-m * 0.035, -m * 0.018, m * 0.07, m * 0.036);
+      c.restore();
+      text(c, 'REFUGE · 2 180 M', rx + m * 0.05, ry - m * 0.03, fs, SUN);
+      // nord et échelle
+      const nx = m * 0.08, ny = m * 0.1;
+      c.fillStyle = 'rgba(232,228,218,.85)';
+      c.beginPath(); c.moveTo(nx, ny - m * 0.045); c.lineTo(nx - m * 0.016, ny); c.lineTo(nx + m * 0.016, ny); c.closePath(); c.fill();
+      text(c, 'N', nx, ny + fs * 1.2, fs, 'rgba(232,228,218,.85)', 'center');
+      const bx = m * 0.05, by = h - m * 0.06, seg = m * 0.06;
+      for (let i = 0; i < 4; i++) { c.fillStyle = i % 2 ? 'rgba(232,228,218,.85)' : 'rgba(232,228,218,.25)'; c.fillRect(bx + i * seg, by, seg, 4); }
+      text(c, '0', bx, by - 6, fs * 0.9, 'rgba(232,228,218,.7)');
+      text(c, '200 M', bx + seg * 4, by - 6, fs * 0.9, 'rgba(232,228,218,.7)', 'right');
+    },
+    saintroch(c, w, h) {
+      const m = Math.min(w, h);
+      const rnd = mulberry(7);
+      c.fillStyle = '#E3E3DF'; c.fillRect(0, 0, w, h);
+      const nx = 7, ny = 4;
+      const x0 = w * 0.17, x1 = w * 0.9, y0 = h * 0.24, y1 = h * 0.82;
+      const dx = (x1 - x0) / (nx - 1), dy = (y1 - y0) / (ny - 1);
+      // verrière centrale
+      c.fillStyle = 'rgba(242,178,0,.5)'; c.fillRect(x0, y0 + dy * 1.15, x1 - x0, dy * 0.7);
+      // axes de la trame
+      c.setLineDash([9, 4, 2, 4]); c.strokeStyle = 'rgba(27,28,30,.42)'; c.lineWidth = 1;
+      for (let i = 0; i < nx; i++) { const x = x0 + i * dx; c.beginPath(); c.moveTo(x, y0 - h * 0.09); c.lineTo(x, y1 + h * 0.05); c.stroke(); }
+      for (let j = 0; j < ny; j++) { const y = y0 + j * dy; c.beginPath(); c.moveTo(x0 - w * 0.09, y); c.lineTo(x1 + w * 0.04, y); c.stroke(); }
+      c.setLineDash([]);
+      const fs = m * 0.028;
+      const bubble = (x, y, t) => {
+        c.fillStyle = '#E3E3DF'; c.strokeStyle = INK; c.lineWidth = 1.2;
+        c.beginPath(); c.arc(x, y, m * 0.03, 0, Math.PI * 2); c.fill(); c.stroke();
+        text(c, t, x, y + fs * 0.36, fs, INK, 'center');
+      };
+      'ABCDEFG'.split('').forEach((t, i) => bubble(x0 + i * dx, y0 - h * 0.09 - m * 0.03, t));
+      for (let j = 0; j < ny; j++) bubble(x0 - w * 0.09 - m * 0.03, y0 + j * dy, String(j + 1));
+      // étals fabriqués avec les bois de l'ancienne toiture
+      for (let i = 0; i < nx - 1; i++) {
+        [0, 2].forEach((j) => {
+          const sx = x0 + i * dx + dx * 0.16, sy = y0 + j * dy + dy * 0.24, sw = dx * 0.68, sh = dy * 0.5;
+          c.fillStyle = '#F2F1ED'; c.fillRect(sx, sy, sw, sh);
+          c.strokeStyle = INK; c.lineWidth = 1; c.strokeRect(sx, sy, sw, sh);
+          c.strokeStyle = 'rgba(27,28,30,.35)';
+          for (let k = 1; k < 4; k++) { c.beginPath(); c.moveTo(sx + (sw * k) / 4, sy); c.lineTo(sx + (sw * k) / 4, sy + sh); c.stroke(); }
+        });
+      }
+      // passants
+      for (let i = 0; i < 26; i++) {
+        const px = x0 + rnd() * (x1 - x0), py = y0 + dy * (rnd() < 0.5 ? 0.85 + rnd() * 0.25 : 1.85 + rnd() * 0.25);
+        c.fillStyle = 'rgba(27,28,30,.55)'; c.beginPath(); c.arc(px, py, m * 0.007, 0, Math.PI * 2); c.fill();
+      }
+      // murs et poteaux
+      const t = m * 0.016;
+      c.fillStyle = INK;
+      c.fillRect(x0 - t * 1.5, y0 - t * 1.5, t, y1 - y0 + t * 3);
+      c.fillRect(x1 + t * 0.5, y0 - t * 1.5, t, y1 - y0 + t * 3);
+      const gap = dx * 0.5;
+      [[y0 - t * 1.5], [y1 + t * 0.5]].forEach(([yy]) => {
+        c.fillRect(x0 - t * 1.5, yy, (x1 - x0) / 2 - gap / 2 + t * 1.5, t);
+        c.fillRect(x0 + (x1 - x0) / 2 + gap / 2, yy, (x1 - x0) / 2 - gap / 2 + t * 1.5, t);
+      });
+      const ps = m * 0.018;
+      for (let i = 0; i < nx; i++) for (let j = 0; j < ny; j++) c.fillRect(x0 + i * dx - ps / 2, y0 + j * dy - ps / 2, ps, ps);
+      text(c, 'PLAN DU REZ-DE-CHAUSSÉE · TRAME 6,00 M', m * 0.05, h - m * 0.04, fs, 'rgba(27,28,30,.75)');
+    }
+  };
+  function paintCover(canvas, id) {
+    if (!canvas || !canvas.getContext) return;
+    const r = canvas.getBoundingClientRect();
+    if (r.width < 2 || r.height < 2) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = Math.round(r.width), h = Math.round(r.height);
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    const c = canvas.getContext('2d');
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    (COVERS[id] || COVERS.tilleul)(c, w, h);
+  }
+  function paintCovers() { $$('.work[data-work]').forEach((card) => paintCover($('canvas', card), card.dataset.work)); }
+  safe('covers', () => { paintCovers(); });
+
+  /* ---------- bandeau défilant ---------- */
+  safe('marquee', () => {
+    const track = $('.marquee-track');
+    const group = track && $('.marquee-group', track);
+    if (!group) return;
+    const need = () => Math.ceil((innerWidth * 2) / Math.max(1, group.offsetWidth)) + 1;
+    for (let i = 1; i < need(); i++) { const cl = group.cloneNode(true); cl.setAttribute('aria-hidden', 'true'); track.appendChild(cl); }
+    let x = 0, dir = -1, boost = 0, w = group.offsetWidth, lastY = scrollY;
+    addEventListener('resize', () => { w = group.offsetWidth; });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { w = group.offsetWidth; });
+    if (lenis) lenis.on('scroll', (l) => { if (l.direction) dir = l.direction > 0 ? -1 : 1; boost = Math.min(Math.abs(l.velocity) * 0.25, 9); });
+    else addEventListener('scroll', () => { const d = scrollY - lastY; lastY = scrollY; if (d) dir = d > 0 ? -1 : 1; boost = Math.min(Math.abs(d) * 0.25, 9); }, { passive: true });
+    if (reduce) return;
+    const loop = () => {
+      x += (0.55 + boost) * dir;
+      boost *= 0.93;
+      if (x <= -w) x += w;
+      if (x > 0) x -= w;
+      track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  });
+
+  /* ---------- texte de l'atelier : les mots s'éclairent ---------- */
+  safe('words', () => {
+    const el = $('[data-words]');
+    if (!el || !G || !ST || reduce) return;
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((n) => {
+      const frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach((part) => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        const s = document.createElement('span'); s.className = 'w'; s.textContent = part; frag.appendChild(s);
+      });
+      n.replaceWith(frag);
+    });
+    G.fromTo($$('.w', el), { opacity: 0.2 }, { opacity: 1, ease: 'none', stagger: 0.05, scrollTrigger: { trigger: el, start: 'top 82%', end: 'bottom 50%', scrub: true } });
+  });
+
+  /* ---------- apparitions ---------- */
+  safe('reveal', () => {
+    if (!G || !ST || reduce) return;
+    $$('[data-reveal]').forEach((el) => {
+      G.from(el, { y: 56, opacity: 0.25, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+    });
+    G.from('.wordmark .wm-inner', { yPercent: 35, ease: 'none', scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+  });
+
+  /* ---------- projets : défilement horizontal ---------- */
+  safe('works', () => {
+    const section = $('.works');
+    const track = $('.works-track');
+    if (!G || !ST || !section || !track) return;
+    const mm = G.matchMedia();
+    mm.add('(min-width: 900px) and (prefers-reduced-motion: no-preference)', () => {
+      section.classList.add('is-h');
+      const dist = () => Math.max(0, track.scrollWidth - document.documentElement.clientWidth);
+      const tween = G.to(track, {
+        x: () => -dist(), ease: 'none',
+        scrollTrigger: { trigger: section, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 }
+      });
+      $$('.work-cover canvas', track).forEach((cv) => {
+        G.fromTo(cv, { xPercent: -4 }, { xPercent: 4, ease: 'none', scrollTrigger: { trigger: cv.parentElement, containerAnimation: tween, start: 'left right', end: 'right left', scrub: true } });
+      });
+      const onFocus = (e) => {
+        const card = e.target.closest('.work');
+        const st = tween.scrollTrigger;
+        if (!card || !st) return;
+        const p = clamp((card.offsetLeft - 40) / Math.max(1, dist()));
+        scrollToY(st.start + p * (st.end - st.start));
+      };
+      track.addEventListener('focusin', onFocus);
+      requestAnimationFrame(() => { paintCovers(); refresh(); });
+      return () => {
+        section.classList.remove('is-h');
+        track.removeEventListener('focusin', onFocus);
+        requestAnimationFrame(paintCovers);
+      };
+    });
+  });
+
+  /* ---------- fiche projet ---------- */
+  safe('case', () => {
+    const dlg = $('#case');
+    if (!dlg) return;
+    let current = 0;
+    let lastFocus = null;
+    const set = (id, v) => { const el = $('#' + id); if (el) el.textContent = v; };
+    function fill(i) {
+      const w = WORKS[i];
+      current = i;
+      set('case-kicker', 'Fiche projet · ' + w.sector);
+      set('case-title', w.name);
+      set('case-intro', w.intro);
+      set('case-sector', w.sector);
+      set('case-surface', w.surface);
+      set('case-year', w.year);
+      set('case-client', w.client);
+      set('case-services', w.services.join(', '));
+      set('case-challenge', w.challenge);
+      set('case-answer', w.answer);
+      const list = $('#case-results');
+      list.innerHTML = '';
+      w.results.forEach(([v, l]) => {
+        const li = document.createElement('li');
+        const s = document.createElement('strong'); s.textContent = v;
+        const sp = document.createElement('span'); sp.textContent = l;
+        li.append(s, sp); list.appendChild(li);
+      });
+      set('case-next-name', WORKS[(i + 1) % WORKS.length].name + ' →');
+      dlg.scrollTop = 0;
+      requestAnimationFrame(() => paintCover($('#case-canvas'), w.id));
+    }
+    function open(id) {
+      const i = WORKS.findIndex((w) => w.id === id);
+      if (i < 0) return;
+      lastFocus = document.activeElement;
+      fill(i);
+      if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+      root.classList.remove('has-cursor');
+      if (lenis) lenis.stop();
+      requestAnimationFrame(() => paintCover($('#case-canvas'), WORKS[i].id));
+    }
+    function close() {
+      if (!dlg.open || dlg.classList.contains('is-closing')) return;
+      dlg.classList.add('is-closing');
+      setTimeout(() => {
+        dlg.classList.remove('is-closing');
+        if (typeof dlg.close === 'function') dlg.close(); else dlg.removeAttribute('open');
+      }, reduce ? 0 : 520);
+    }
+    dlg.addEventListener('close', () => {
+      if (lenis) lenis.start();
+      if (fine) root.classList.add('has-cursor');
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    });
+    dlg.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
+    $('.case-close', dlg).addEventListener('click', close);
+    $('#case-next').addEventListener('click', () => fill((current + 1) % WORKS.length));
+    $$('.work[data-work] .work-open').forEach((b) => b.addEventListener('click', () => open(b.closest('.work').dataset.work)));
+  });
+
+  /* ---------- accordéon des savoir-faire ---------- */
+  safe('services', () => {
+    const items = $$('.svc');
+    items.forEach((item) => {
+      const btn = $('.svc-row', item);
+      btn.addEventListener('click', () => {
+        const willOpen = !item.classList.contains('is-open');
+        items.forEach((o) => { o.classList.remove('is-open'); $('.svc-row', o).setAttribute('aria-expanded', 'false'); });
+        if (willOpen) { item.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); }
+        setTimeout(refresh, 750);
+      });
+    });
+  });
+
+  /* ---------- indicateurs et calendrier ---------- */
+  safe('metrics', () => {
+    if (!G || !ST || reduce) return;
+    $$('.metric').forEach((m) => {
+      const num = $('.num', m);
+      const fill = $('.gauge-fill', m);
+      const val = parseFloat(m.dataset.value);
+      const d = parseInt(m.dataset.decimals || '0', 10);
+      ST.create({ trigger: m, start: 'top 88%', once: true, onEnter: () => {
+        const o = { v: 0 };
+        G.fromTo(fill, { scaleX: 0 }, { scaleX: 1, duration: 1.8, ease: 'expo.out' });
+        G.to(o, { v: val, duration: 1.8, ease: 'expo.out', onUpdate: () => { num.textContent = fr(o.v, d); } });
+      } });
+    });
+    ST.create({ trigger: '.gantt', start: 'top 80%', once: true, onEnter: () => {
+      G.fromTo('.gantt-bar', { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: 'expo.out', stagger: 0.14 });
+      G.fromTo('.gantt-bar span', { opacity: 0 }, { opacity: 1, duration: 0.6, delay: 0.5, stagger: 0.14 });
+    } });
+  });
+
+  /* ---------- témoignages ---------- */
+  safe('quotes', () => {
+    const quotes = $$('.quote');
+    const bar = $('.quote-progress i');
+    const count = $('.quote-count');
+    if (quotes.length < 2) return;
+    let i = 0, timer = null, inView = false;
+    const DURATION = 7000;
+    function restart() {
+      clearTimeout(timer);
+      bar.style.transition = 'none';
+      bar.style.transform = 'scaleX(0)';
+      if (reduce || !inView) return;
+      void bar.offsetWidth;
+      bar.style.transition = 'transform ' + DURATION + 'ms linear';
+      bar.style.transform = 'scaleX(1)';
+      timer = setTimeout(() => show(i + 1), DURATION);
+    }
+    function show(n) {
+      quotes[i].classList.remove('is-active');
+      quotes[i].setAttribute('aria-hidden', 'true');
+      i = (n + quotes.length) % quotes.length;
+      quotes[i].classList.add('is-active');
+      quotes[i].removeAttribute('aria-hidden');
+      count.textContent = (i + 1) + ' / ' + quotes.length;
+      restart();
+    }
+    $('[data-quote="prev"]').addEventListener('click', () => show(i - 1));
+    $('[data-quote="next"]').addEventListener('click', () => show(i + 1));
+    if (window.IntersectionObserver) new IntersectionObserver(([en]) => { inView = en.isIntersecting; restart(); }, { threshold: 0.4 }).observe($('.quote-stage'));
+  });
+
+  /* ---------- copier ---------- */
+  function copyText(str, btn, selectEl) {
+    const label = btn.dataset.label || btn.textContent;
+    btn.dataset.label = label;
+    const done = (msg) => { btn.textContent = msg; clearTimeout(btn._t); btn._t = setTimeout(() => { btn.textContent = label; }, 2400); };
+    const fallback = () => {
+      if (selectEl) { const r = document.createRange(); r.selectNodeContents(selectEl); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+      done('Sélectionné : Ctrl+C ou ⌘C');
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(str).then(() => done('Copié'), fallback);
+      else fallback();
+    } catch (e) { fallback(); }
+  }
+  safe('copy', () => {
+    $$('[data-copy]').forEach((b) => b.addEventListener('click', () => copyText(b.dataset.copy, b, document.getElementById(b.dataset.select))));
+  });
+
+  /* ---------- formulaire de demande ---------- */
+  safe('form', () => {
+    const form = $('#brief-form');
+    const out = $('#brief-out');
+    const pre = $('#brief-text');
+    if (!form) return;
+    $$('[data-required] input, [data-required] textarea', form).forEach((input) => input.addEventListener('input', () => {
+      if (input.getAttribute('aria-invalid') === 'true' && input.value.trim()) {
+        input.setAttribute('aria-invalid', 'false');
+        $('.err', input.closest('.field')).textContent = '';
+      }
+    }));
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let firstBad = null;
+      $$('[data-required]', form).forEach((f) => {
+        const input = $('input, textarea', f);
+        const v = input.value.trim();
+        let msg = '';
+        if (!v) msg = input.dataset.msg || 'Ce champ est requis.';
+        else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) msg = 'Vérifiez l’adresse, par exemple prenom@domaine.fr.';
+        $('.err', f).textContent = msg;
+        input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+        if (msg && !firstBad) firstBad = input;
+      });
+      if (firstBad) { firstBad.focus(); return; }
+      const data = new FormData(form);
+      const types = data.getAll('type');
+      const lines = [
+        'Demande de projet pour Solstice Architectes',
+        '',
+        'Nom : ' + data.get('name').trim(),
+        'E-mail : ' + data.get('email').trim(),
+        'Commune du terrain : ' + ((data.get('place') || '').trim() || 'Non précisée'),
+        'Projet : ' + (types.length ? types.join(', ') : 'Non précisé'),
+        'Surface envisagée : ' + (data.get('surface') || 'Non précisée'),
+        '',
+        'Description :',
+        data.get('message').trim()
+      ];
+      pre.textContent = lines.join('\n');
+      form.hidden = true;
+      out.hidden = false;
+      $('#brief-out-title').focus();
+      refresh();
+    });
+    $('#brief-copy').addEventListener('click', (e) => copyText(pre.textContent, e.currentTarget, pre));
+    $('#brief-edit').addEventListener('click', () => { out.hidden = true; form.hidden = false; $('#f-message').focus(); refresh(); });
+  });
+
+  /* ---------- logotype du pied de page ---------- */
+  safe('wordmark', () => {
+    const wm = $('.wordmark');
+    const inner = wm && $('.wm-inner', wm);
+    if (!inner) return;
+    const letters = $$('span', inner);
+    function fit() {
+      wm.style.fontSize = '100px';
+      const natural = inner.getBoundingClientRect().width;
+      const avail = wm.clientWidth;
+      if (natural > 0 && avail > 0) wm.style.fontSize = ((100 * avail) / natural).toFixed(2) + 'px';
+    }
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    addEventListener('resize', fit);
+    if (!fine || reduce) return;
+    wm.addEventListener('pointermove', (e) => {
+      const span = wm.clientWidth * 0.2;
+      letters.forEach((l) => {
+        const r = l.getBoundingClientRect();
+        const d = (e.clientX - (r.left + r.width / 2)) / span;
+        const k = Math.exp(-d * d * 1.6);
+        l.style.fontWeight = String(Math.round(900 - 760 * k));
+      });
+    });
+    wm.addEventListener('pointerleave', () => letters.forEach((l) => { l.style.fontWeight = ''; }));
+  });
+
+  /* ---------- curseur et effets magnétiques ---------- */
+  safe('cursor', () => {
+    if (!fine) return;
+    const dot = $('.cursor-dot');
+    const ring = $('.cursor-ring');
+    const label = $('span', ring);
+    root.classList.add('has-cursor');
+    let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my, seen = false;
+    addEventListener('pointermove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!seen) { rx = mx; ry = my; seen = true; }
+      dot.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0)';
+    }, { passive: true });
+    const loop = () => {
+      rx += (mx - rx) * (reduce ? 1 : 0.18);
+      ry += (my - ry) * (reduce ? 1 : 0.18);
+      ring.style.transform = 'translate3d(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px,0)';
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+    document.addEventListener('pointerover', (e) => {
+      const t = e.target;
+      const big = t.closest('[data-cursor]');
+      const link = t.closest('a, button, label, input[type="range"], [role="button"]');
+      const field = t.closest('input:not([type="range"]), textarea, select');
+      ring.classList.toggle('is-big', !!big);
+      ring.classList.toggle('is-link', !big && !!link);
+      ring.classList.toggle('is-hidden', !!field);
+      dot.classList.toggle('is-hidden', !!field || !!big);
+      label.textContent = big ? big.dataset.cursor : '';
+    });
+    root.addEventListener('pointerleave', () => { ring.classList.add('is-hidden'); dot.classList.add('is-hidden'); });
+    root.addEventListener('pointerenter', () => { ring.classList.remove('is-hidden'); dot.classList.remove('is-hidden'); });
+  });
+  safe('magnetic', () => {
+    if (!fine || reduce || !G) return;
+    $$('.magnetic').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - (r.left + r.width / 2);
+        const y = e.clientY - (r.top + r.height / 2);
+        G.to(el, { x: x * 0.32, y: y * 0.32, duration: 0.6, ease: 'power3.out' });
+      });
+      el.addEventListener('pointerleave', () => G.to(el, { x: 0, y: 0, duration: 1, ease: 'elastic.out(1, 0.4)' }));
+    });
+  });
+
+  /* ---------- redimensionnement ---------- */
+  safe('resize', () => {
+    let t = null;
+    addEventListener('resize', () => { clearTimeout(t); t = setTimeout(paintCovers, 180); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { paintCovers(); refresh(); });
+    addEventListener('load', refresh);
+  });
+
+  /* ---------- chargement : un lever et un coucher de soleil ---------- */
+  safe('intro', () => {
+    const loader = $('.loader');
+    const intro = () => {
+      if (!G || reduce) return;
+      const tl = G.timeline({ defaults: { ease: 'expo.out' } });
+      tl.fromTo('.hero-title .line-in', { yPercent: 112 }, { yPercent: 0, duration: 1.5, stagger: 0.12 }, 0)
+        .from('.eyebrow > span, .hero-foot > *', { y: 26, opacity: 0, duration: 1.2, stagger: 0.07 }, 0.3)
+        .from('.hero-gl', { opacity: 0, duration: 1.8, ease: 'power2.out' }, 0)
+        .from('.nav', { yPercent: -60, opacity: 0, duration: 1.2 }, 0.25);
+    };
+    if (!loader) { intro(); return; }
+    if (reduce || !G) { loader.remove(); return; }
+    G.set('.hero-title .line-in', { yPercent: 112 });
+    const num = $('#loader-num');
+    const bar = $('.loader-bar i');
+    const arc = $('.arc-fill');
+    const dot = $('.arc-sun');
+    const state = { v: 0 };
+    const loaded = new Promise((res) => (document.readyState === 'complete' ? res() : addEventListener('load', res, { once: true })));
+    const fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    const ready = Promise.race([Promise.all([loaded, fonts]), new Promise((res) => setTimeout(res, 2600))]);
+    G.to(state, {
+      v: 100, duration: 1.8, ease: 'power2.inOut',
+      onUpdate: () => {
+        const p = state.v / 100;
+        num.textContent = String(Math.round(state.v)).padStart(3, '0');
+        bar.style.transform = 'scaleX(' + p.toFixed(3) + ')';
+        arc.style.strokeDashoffset = String(1 - p);
+        const a = Math.PI * (1 - p);
+        dot.setAttribute('cx', (100 + 96 * Math.cos(a)).toFixed(2));
+        dot.setAttribute('cy', (100 - 96 * Math.sin(a)).toFixed(2));
+      },
+      onComplete: () => ready.then(() => {
+        G.timeline({ onComplete: () => loader.remove() })
+          .to('.loader-inner, .loader-stage', { yPercent: -30, opacity: 0, duration: 0.7, ease: 'power3.in' })
+          .to(loader, { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.1, ease: 'expo.inOut' }, '-=0.2')
+          .add(intro, '-=0.55');
+      })
+    });
+  });
+})();
+</script>
+<script>
+setTimeout(function () {
+  var l = document.querySelector('.loader');
+  if (!l) return;
+  l.remove();
+  document.querySelectorAll('.hero-title .line-in').forEach(function (e) { e.style.transform = 'none'; });
+}, 6500);
+</script>
+</body>
+</html>
